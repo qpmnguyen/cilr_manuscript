@@ -1,0 +1,399 @@
+\begin{thebibliography}{10}
+
+\bibitem{cho2012}
+Cho I, Blaser MJ.
+\newblock The Human Microbiome: At the Interface of Health and Disease.
+\newblock Nature Reviews Genetics. 2012;13(4):260--270.
+\newblock doi:{10.1038/nrg3182}.
+
+\bibitem{callahan2016}
+Callahan BJ, McMurdie PJ, Rosen MJ, Han AW, Johnson AJA, Holmes SP.
+\newblock {{DADA2}}: {{High}}-Resolution Sample Inference from {{Illumina}}
+  Amplicon Data.
+\newblock Nature Methods. 2016;13(7):581--583.
+\newblock doi:{10.1038/nmeth.3869}.
+
+\bibitem{truong2015}
+Truong DT, Franzosa EA, Tickle TL, Scholz M, Weingart G, Pasolli E, et~al.
+\newblock {{MetaPhlAn2}} for Enhanced Metagenomic Taxonomic Profiling.
+\newblock Nature Methods. 2015;12(10):902--903.
+\newblock doi:{10.1038/nmeth.3589}.
+
+\bibitem{li2019}
+Li H.
+\newblock Statistical and {{Computational Methods}} in {{Microbiome}} and
+  {{Metagenomics}}.
+\newblock In: Handbook of {{Statistical Genomics}}. {John Wiley \& Sons, Ltd};
+  2019. p. 977--550.
+
+\bibitem{li2015}
+Li H.
+\newblock Microbiome, {{Metagenomics}}, and {{High}}-{{Dimensional
+  Compositional Data Analysis}}.
+\newblock Annual Review of Statistics and Its Application. 2015;2(1):73--94.
+\newblock doi:{10.1146/annurev-statistics-010814-020351}.
+
+\bibitem{shi2016}
+Shi P, Zhang A, Li H.
+\newblock Regression Analysis for Microbiome Compositional Data.
+\newblock The Annals of Applied Statistics. 2016;10(2):1019--1040.
+\newblock doi:{10.1214/16-AOAS928}.
+
+\bibitem{sankaran2014}
+Sankaran K, Holmes S.
+\newblock {{structSSI}}: {{Simultaneous}} and {{Selective Inference}} for
+  {{Grouped}} or {{Hierarchically Structured Data}}.
+\newblock Journal of statistical software. 2014;59(13):1--21.
+\newblock doi:{10.18637/jss.v059.i13}.
+
+\bibitem{benjamini1995}
+Benjamini Y, Hochberg Y.
+\newblock Controlling the {{False Discovery Rate}}: {{A Practical}} and
+  {{Powerful Approach}} to {{Multiple Testing}}.
+\newblock Journal of the Royal Statistical Society Series B (Methodological).
+  1995;57(1):289--300.
+
+\bibitem{chen2018}
+Chen J, King E, Deek R, Wei Z, Yu Y, Grill D, et~al.
+\newblock An Omnibus Test for Differential Distribution Analysis of Microbiome
+  Sequencing Data.
+\newblock Bioinformatics. 2018;34(4):643--651.
+\newblock doi:{10.1093/bioinformatics/btx650}.
+
+\bibitem{weiss2017}
+Weiss S, Xu ZZ, Peddada S, Amir A, Bittinger K, Gonzalez A, et~al.
+\newblock Normalization and Microbial Differential Abundance Strategies Depend
+  upon Data Characteristics.
+\newblock Microbiome. 2017;5(1).
+\newblock doi:{10.1186/s40168-017-0237-y}.
+
+\bibitem{mcmurdie2014}
+McMurdie PJ, Holmes S.
+\newblock Waste {{Not}}, {{Want Not}}: {{Why Rarefying Microbiome Data Is
+  Inadmissible}}.
+\newblock PLOS Computational Biology. 2014;10(4):e1003531.
+\newblock doi:{10.1371/journal.pcbi.1003531}.
+
+\bibitem{love2014}
+Love MI, Huber W, Anders S.
+\newblock Moderated Estimation of Fold Change and Dispersion for {{RNA}}-Seq
+  Data with {{DESeq2}}.
+\newblock Genome Biology. 2014;15(12):550.
+\newblock doi:{10.1186/s13059-014-0550-8}.
+
+\bibitem{quinn2019}
+Quinn TP, Erb I, Gloor G, Notredame C, Richardson MF, Crowley TM.
+\newblock A Field Guide for the Compositional Analysis of Any-Omics Data.
+\newblock GigaScience. 2019;8(giz107).
+\newblock doi:{10.1093/gigascience/giz107}.
+
+\bibitem{quinn2018b}
+Quinn TP, Erb I, Richardson MF, Crowley TM.
+\newblock Understanding Sequencing Data as Compositions: An Outlook and Review.
+\newblock Bioinformatics. 2018;34(16):2870--2878.
+\newblock doi:{10.1093/bioinformatics/bty175}.
+
+\bibitem{gloor2017}
+Gloor GB, Macklaim JM, {Pawlowsky-Glahn} V, Egozcue JJ.
+\newblock Microbiome {{Datasets Are Compositional}}: {{And This Is Not
+  Optional}}.
+\newblock Frontiers in Microbiology. 2017;8.
+\newblock doi:{10.3389/fmicb.2017.02224}.
+
+\bibitem{aitchison1999}
+Aitchison J.
+\newblock A {{Concise Guide}} to {{Compositional Data Analysis}}. 1999; p. 134.
+
+\bibitem{kurtz2015}
+Kurtz ZD, M{\"u}ller CL, Miraldi ER, Littman DR, Blaser MJ, Bonneau RA.
+\newblock Sparse and {{Compositionally Robust Inference}} of {{Microbial
+  Ecological Networks}}.
+\newblock PLOS Computational Biology. 2015;11(5):e1004226.
+\newblock doi:{10.1371/journal.pcbi.1004226}.
+
+\bibitem{kaul2017}
+Kaul A, Davidov O, Peddada SD.
+\newblock Structural Zeros in High-Dimensional Data with Applications to
+  Microbiome Studies.
+\newblock Biostatistics. 2017;18(3):422--433.
+\newblock doi:{10.1093/biostatistics/kxw053}.
+
+\bibitem{kaul2017a}
+Kaul A, Mandal S, Davidov O, Peddada SD.
+\newblock Analysis of {{Microbiome Data}} in the {{Presence}} of {{Excess
+  Zeros}}.
+\newblock Frontiers in Microbiology. 2017;8.
+\newblock doi:{10.3389/fmicb.2017.02114}.
+
+\bibitem{egozcue2005}
+Egozcue JJ, {Pawlowsky-Glahn} V.
+\newblock Groups of {{Parts}} and {{Their Balances}} in {{Compositional Data
+  Analysis}}.
+\newblock Mathematical Geology. 2005;37(7):795--828.
+\newblock doi:{10.1007/s11004-005-7381-9}.
+
+\bibitem{goeman2007}
+Goeman JJ, B{\"u}hlmann P.
+\newblock Analyzing Gene Expression Data in Terms of Gene Sets: Methodological
+  Issues.
+\newblock Bioinformatics. 2007;23(8):980--987.
+\newblock doi:{10.1093/bioinformatics/btm051}.
+
+\bibitem{subramanian2005}
+Subramanian A, Tamayo P, Mootha VK, Mukherjee S, Ebert BL, Gillette MA, et~al.
+\newblock Gene Set Enrichment Analysis: {{A}} Knowledge-Based Approach for
+  Interpreting Genome-Wide Expression Profiles.
+\newblock Proceedings of the National Academy of Sciences.
+  2005;102(43):15545--15550.
+\newblock doi:{10.1073/pnas.0506580102}.
+
+\bibitem{hanzelmann2013}
+H{\"a}nzelmann S, Castelo R, Guinney J.
+\newblock {{GSVA}}: Gene Set Variation Analysis for Microarray and
+  {{RNA}}-{{Seq}} Data.
+\newblock BMC Bioinformatics. 2013;14(1):7.
+\newblock doi:{10.1186/1471-2105-14-7}.
+
+\bibitem{frost2020a}
+Frost HR.
+\newblock Variance-Adjusted {{Mahalanobis}} ({{VAM}}): A Fast and Accurate
+  Method for Cell-Specific Gene Set Scoring.
+\newblock Nucleic Acids Research. 2020;48(16):e94--e94.
+\newblock doi:{10.1093/nar/gkaa582}.
+
+\bibitem{tian2005}
+Tian L, Greenberg SA, Kong SW, Altschuler J, Kohane IS, Park PJ.
+\newblock Discovering Statistically Significant Pathways in Expression
+  Profiling Studies.
+\newblock Proceedings of the National Academy of Sciences.
+  2005;102(38):13544--13549.
+\newblock doi:{10.1073/pnas.0506577102}.
+
+\bibitem{egozcue2003}
+Egozcue JJ, {Pawlowsky-Glahn} V, {Mateu-Figueras} G, {Barcelo-Vidal} C.
+\newblock Isometric {{Logratio Transformations}} for {{Compositional Data
+  Analysis}}.
+\newblock Mathematical Geology. 2003; p.~22.
+
+\bibitem{barbie2009}
+Barbie DA, Tamayo P, Boehm JS, Kim SY, Moody SE, Dunn IF, et~al.
+\newblock Systematic {{RNA}} Interference Reveals That Oncogenic
+  {{{\emph{KRAS}}}}-Driven Cancers Require {{TBK1}}.
+\newblock Nature. 2009;462(7269):108--112.
+\newblock doi:{10.1038/nature08460}.
+
+\bibitem{quast2013}
+Quast C, Pruesse E, Yilmaz P, Gerken J, Schweer T, Yarza P, et~al.
+\newblock The {{SILVA}} Ribosomal {{RNA}} Gene Database Project: Improved Data
+  Processing and Web-Based Tools.
+\newblock Nucleic Acids Research. 2013;41(D1):D590--D596.
+\newblock doi:{10.1093/nar/gks1219}.
+
+\bibitem{delignette-muller2015}
+{Delignette-Muller} ML, Dutang C.
+\newblock Fitdistrplus: {{An R}} Package for Fitting Distributions.
+\newblock Journal of Statistical Software. 2015;64(4):1--34.
+
+\bibitem{benaglia2009}
+Benaglia T, Chauveau D, Hunter DR, Young D.
+\newblock Mixtools: {{An R}} Package for Analyzing Finite Mixture Models.
+\newblock Journal of Statistical Software. 2009;32(6):1--29.
+
+\bibitem{washburne2017}
+Washburne AD, Silverman JD, Leff JW, Bennett DJ, Darcy JL, Mukherjee S, et~al.
+\newblock Phylogenetic Factorization of Compositional Data Yields Lineage-Level
+  Associations in Microbiome Datasets.
+\newblock PeerJ. 2017;5:e2969.
+\newblock doi:{10.7717/peerj.2969}.
+
+\bibitem{silverman2017}
+Silverman JD, Washburne AD, Mukherjee S, David LA.
+\newblock A Phylogenetic Transform Enhances Analysis of Compositional
+  Microbiota Data.
+\newblock eLife. 2017;6:e21887.
+\newblock doi:{10.7554/eLife.21887}.
+
+\bibitem{morton2017}
+Morton JT, Sanders J, Quinn RA, McDonald D, Gonzalez A, {V{\'a}zquez-Baeza} Y,
+  et~al.
+\newblock Balance {{Trees Reveal Microbial Niche Differentiation}}.
+\newblock mSystems. 2017;2(1).
+\newblock doi:{10.1128/mSystems.00162-16}.
+
+\bibitem{efron2004}
+Efron B.
+\newblock Large-{{Scale Simultaneous Hypothesis Testing}}.
+\newblock Journal of the American Statistical Association.
+  2004;99(465):96--104.
+\newblock doi:{10.1198/016214504000000089}.
+
+\bibitem{wu2012}
+Wu D, Smyth GK.
+\newblock Camera: A Competitive Gene Set Test Accounting for Inter-Gene
+  Correlation.
+\newblock Nucleic Acids Research. 2012;40(17):e133.
+\newblock doi:{10.1093/nar/gks461}.
+
+\bibitem{calgaro2020}
+Calgaro M, Romualdi C, Waldron L, Risso D, Vitulo N.
+\newblock Assessment of Statistical Methods from Single Cell, Bulk {{RNA}}-Seq,
+  and Metagenomics Applied to Microbiome Data.
+\newblock Genome Biology. 2020;21(1):191.
+\newblock doi:{10.1186/s13059-020-02104-1}.
+
+\bibitem{cario1997}
+Cario MC.
+\newblock Modeling and {{Generating Random Vectors}} with {{Arbitrary Marginal
+  Distributions}} and {{Correlation Matrix}}. 1997; p.~19.
+
+\bibitem{agresti1998}
+Agresti A, Coull BA.
+\newblock Approximate {{Is Better}} than "{{Exact}}" for {{Interval
+  Estimation}} of {{Binomial Proportions}}.
+\newblock The American Statistician. 1998;52(2):119--126.
+\newblock doi:{10.2307/2685469}.
+
+\bibitem{delong1988}
+DeLong ER, DeLong DM, {Clarke-Pearson} DL.
+\newblock Comparing the Areas under Two or More Correlated Receiver Operating
+  Characteristic Curves: A Nonparametric Approach.
+\newblock Biometrics. 1988;44(3):837--845.
+
+\bibitem{hawinkel2019}
+Hawinkel S, Mattiello F, Bijnens L, Thas O.
+\newblock A Broken Promise: Microbiome Differential Abundance Methods Do Not
+  Control the False Discovery Rate.
+\newblock Briefings in Bioinformatics. 2019;20(1):210--221.
+\newblock doi:{10.1093/bib/bbx104}.
+
+\bibitem{breiman2001}
+Breiman L.
+\newblock Random {{Forests}}.
+\newblock Machine Learning. 2001;45(1):5--32.
+\newblock doi:{10.1023/A:1010933404324}.
+
+\bibitem{kuhn2020}
+Kuhn M, Wickham H.
+\newblock Tidymodels: {{Easily}} Install and Load the 'tidymodels' Packages;
+  2020.
+
+\bibitem{xiao2018}
+Xiao J, Chen L, Yu Y, Zhang X, Chen J.
+\newblock A {{Phylogeny}}-{{Regularized Sparse Regression Model}} for
+  {{Predictive Modeling}} of {{Microbial Community Data}}.
+\newblock Frontiers in Microbiology. 2018;9.
+\newblock doi:{10.3389/fmicb.2018.03112}.
+
+\bibitem{dong2020}
+Dong M, Li L, Chen M, Kusalik A, Xu W.
+\newblock Predictive Analysis Methods for Human Microbiome Data with
+  Application to {{Parkinson}}'s Disease.
+\newblock PLOS ONE. 2020;15(8):e0237779.
+\newblock doi:{10.1371/journal.pone.0237779}.
+
+\bibitem{pasolli2017}
+Pasolli E, Schiffer L, Manghi P, Renson A, Obenchain V, Truong DT, et~al.
+\newblock Accessible, Curated Metagenomic Data through {{ExperimentHub}}.
+\newblock Nature Methods. 2017;14(11):1023--1024.
+\newblock doi:{10.1038/nmeth.4468}.
+
+\bibitem{schiffer2019}
+Schiffer L, Azhar R, Shepherd L, Ramos M, Geistlinger L, Huttenhower C, et~al.
+\newblock {{HMP16SData}}: {{Efficient}} Access to the Human Microbiome Project
+  through Bioconductor.
+\newblock American Journal of Epidemiology. 2019;doi:{10.1093/aje/kwz006}.
+
+\bibitem{gonzalez2018}
+Gonzalez A, {Navas-Molina} JA, Kosciolek T, McDonald D, {V{\'a}zquez-Baeza} Y,
+  Ackermann G, et~al.
+\newblock Qiita: Rapid, Web-Enabled Microbiome Meta-Analysis.
+\newblock Nature Methods. 2018;15(10):796--798.
+\newblock doi:{10.1038/s41592-018-0141-9}.
+
+\bibitem{consortium2012}
+Consortium THMP, Huttenhower C, Gevers D, Knight R, Abubucker S, Badger JH,
+  et~al.
+\newblock Structure, Function and Diversity of the Healthy Human Microbiome.
+\newblock Nature. 2012;486(7402):207--214.
+\newblock doi:{10.1038/nature11234}.
+
+\bibitem{proctor2019}
+Proctor LM, Creasy HH, Fettweis JM, {Lloyd-Price} J, Mahurkar A, Zhou W, et~al.
+\newblock The {{Integrative Human Microbiome Project}}.
+\newblock Nature. 2019;569(7758):641--648.
+\newblock doi:{10.1038/s41586-019-1238-8}.
+
+\bibitem{thurnheer2016}
+Thurnheer T, Bostanci N, Belibasakis GN.
+\newblock Microbial Dynamics during Conversion from Supragingival to
+  Subgingival Biofilms in an in Vitro Model.
+\newblock Molecular Oral Microbiology. 2016;31(2):125--135.
+\newblock doi:{10.1111/omi.12108}.
+
+\bibitem{beghini2019}
+Beghini F, Renson A, Zolnik CP, Geistlinger L, Usyk M, Moody TU, et~al.
+\newblock Tobacco Exposure Associated with Oral Microbiota Oxygen Utilization
+  in the {{New York City Health}} and {{Nutrition Examination Study}}.
+\newblock Annals of Epidemiology. 2019;34:18--25.e3.
+\newblock doi:{10.1016/j.annepidem.2019.03.005}.
+
+\bibitem{matteocalgaro2020}
+Calgaro M. Mcalgaro93/Sc2meta: {{Paper Release}}; 2020.
+\newblock Zenodo.
+
+\bibitem{nielsen2014}
+Nielsen HB, Almeida M, Juncker AS, Rasmussen S, Li J, Sunagawa S, et~al.
+\newblock Identification and Assembly of Genomes and Genetic Elements in
+  Complex Metagenomic Samples without Using Reference Genomes.
+\newblock Nature Biotechnology. 2014;32(8):822--828.
+\newblock doi:{10.1038/nbt.2939}.
+
+\bibitem{gevers2014}
+Gevers D, Kugathasan S, Denson LA, {V{\'a}zquez-Baeza} Y, Van~Treuren W, Ren B,
+  et~al.
+\newblock The {{Treatment}}-{{Naive Microbiome}} in {{New}}-{{Onset Crohn}}'s
+  {{Disease}}.
+\newblock Cell Host \& Microbe. 2014;15(3):382--392.
+\newblock doi:{10.1016/j.chom.2014.02.005}.
+
+\bibitem{martin2020}
+Martin BD, Witten D, Willis AD.
+\newblock Modeling Microbial Abundances and Dysbiosis with Beta-Binomial
+  Regression.
+\newblock The Annals of Applied Statistics. 2020;14(1):94--115.
+\newblock doi:{10.1214/19-AOAS1283}.
+
+\bibitem{khatri2012}
+Khatri P, Sirota M, Butte AJ.
+\newblock Ten {{Years}} of {{Pathway Analysis}}: {{Current Approaches}} and
+  {{Outstanding Challenges}}.
+\newblock PLOS Computational Biology. 2012;8(2):e1002375.
+\newblock doi:{10.1371/journal.pcbi.1002375}.
+
+\bibitem{ashburner2000}
+Ashburner M, Ball CA, Blake JA, Botstein D, Butler H, Cherry JM, et~al.
+\newblock Gene {{Ontology}}: Tool for the Unification of Biology.
+\newblock Nature genetics. 2000;25(1):25--29.
+\newblock doi:{10.1038/75556}.
+
+\bibitem{chong2020}
+Chong J, Liu P, Zhou G, Xia J.
+\newblock Using {{MicrobiomeAnalyst}} for Comprehensive Statistical,
+  Functional, and Meta-Analysis of Microbiome Data.
+\newblock Nature Protocols. 2020;15(3):799--821.
+\newblock doi:{10.1038/s41596-019-0264-1}.
+
+\bibitem{naim}
+Naim I, Gildea D.
+\newblock Convergence of the {{EM Algorithm}} for {{Gaussian Mixtures}} with
+  {{Unbalanced Mixing Coefficients}}; p.~8.
+
+\bibitem{martin-fernandez2012}
+{Mart{\'i}n-Fern{\'a}ndez} JA, Hron K, Templ M, Filzmoser P,
+  {Palarea-Albaladejo} J.
+\newblock Model-Based Replacement of Rounded Zeros in Compositional Data:
+  {{Classical}} and Robust Approaches.
+\newblock Computational Statistics \& Data Analysis. 2012;56(9):2688--2704.
+\newblock doi:{10.1016/j.csda.2012.02.012}.
+
+\end{thebibliography}
