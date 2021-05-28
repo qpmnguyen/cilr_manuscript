@@ -193,18 +193,18 @@ Figure \ref{fig:sim_pred_auc} and \ref{fig:sim_pred_rsq} showed results from sim
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{figures/sim_pred_auc.png}
+    \includegraphics[width = \textwidth]{figures/sim_pred_combined.png}
     \caption{AUC scores of a random forest model for a binary outcome trained on cILR, ssGSEA, GSVA generated scores as well as on standard CLR transformed data evaluated on simulated data across sparsity levels, correlation, and signal-to-noise ratio. Panel \textbf{(A)} and \textbf{(B)} represent results across different levels of model saturation (proportion of sets associated with the outcome). cILR approaches outperformed GSVA and ssGSEA but not standard CLR.}
     \label{fig:sim_pred_auc}
 \end{figure}
 
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{figures/sim_pred_rsq.png}
-    \caption{Predictive R-squared of a random forest model for a continuous outcome trained on cILR, ssGSEA, GSVA generated scores as well as on standard CLR transformed data evaluated on simulated data across sparsity levels, correlation, and signal-to-noise ratio. Panel \textbf{(A)} and \textbf{(B)} represent results across different levels of model saturation (proportion of sets associated with the outcome). cILR approaches outperformed GSVA and ssGSEA but not standard CLR.}
-    \label{fig:sim_pred_rsq}
-\end{figure}
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=\textwidth]{figures/sim_pred_rsq.png}
+%    \caption{Predictive R-squared of a random forest model for a continuous outcome trained on cILR,     %ssGSEA, GSVA generated scores as well as on standard CLR transformed data evaluated on simulated data %across sparsity levels, correlation, and signal-to-noise ratio. Panel \textbf{(A)} and \textbf{(B)} %represent results across different levels of model saturation (proportion of sets associated with the %outcome). cILR approaches outperformed GSVA and ssGSEA but not standard CLR.}
+%    \label{fig:sim_pred_rsq}
+%\end{figure}
 
 In addition to parametric simulations, we also demonstrated predictive performance using real data sets in Figure \ref{fig:pred_data}. The learning task across both data sets is to classify patients who are diagnosed with inflammatory bowel disease (includes both Crohn's disease and ulcerative colitis) and healthy controls. The Gevers et al. \cite{gevers2014} data set is a 16S rRNA sequencing data set while the Nielsen et al. \cite{nielsen2014} is a whole-genome shotgun sequencing data set. Similar to simulation experiments, across both data sets cILR methods provide much better performance than either GSVA or ssGSEA. Interestingly, the standard CLR approach only outperformed cILR in the 16S rRNA data set but was marginally worse in the WGS data set. Additionally, we observed that using the normal distribution for cILR generates better predictive performance compared to the other variants.
 
