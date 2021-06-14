@@ -9,19 +9,38 @@
 \usepackage{hyperref}
 \usepackage{float}
 \usepackage[parfill]{parskip}
+\newcommand{\overbar}[1]{\mkern 2mu\overline{\mkern-2mu#1\mkern-20mu}\mkern 20mu}
 
-\author{Quang P. Nguyen}
-\title{Supplementary Materials}
+\title{Supplementary Materials for cILR: Taxonomic enrichment analysis with isometric log ratios}
 \begin{document}
+\author{Quang P. Nguyen, Anne G. Hoen, H. Robert Frost}
 \maketitle
 \captionsetup[figure]{labelfont={bf},name={Figure},labelsep=period, margin=1cm}
 
-\section{Performance Evaluation} 
-\section{Distribution fitting}
-\section{p-value behaviour}
+
+\section{Addressing variance inflation due to correlation}
+In order to perform inference with competitive isometric log ratio (cILR), we estimated the null distribution empirically following Efron et al. \cite{efron2004}. We chose two distributional forms for the null: the normal distribution and a two-component mixture normal distribution. Subsequently, we estimated the parameters of the respective distributions from a column (or variable) permuted raw score matrix. This means that our null distribution for a given set is equivalent to scores computed for sets of similar sizes but containing randomly chosen taxa. For the normal distribution, we estimated parameters using the maximum likelihood using the \emph{fitdistrplus} package \cite{delignette-muller2015}. For the mixture normal distribution, we utilized the expectation-maximization procedure from the package \emph{mixtools} \cite{benaglia2009}. 
+
+However, when variables are correlated, the variance of the sample mean of the variables is inflated \cite{wu2012}. This is a significant problem since evidence shows that there is strong inter-taxa correlation within the microbiome \cite{kurtz2015}. Without loss of generalizability, for a set of variables $x_1, ..., x_p$ we have the variance of the mean $\bar{x}$ to be:  
+\begin{equation} \label{eq:1}
+    Var(\bar{x}) = \frac{1}{m^2}\left(\sum_{i = 1}(\sigma_i^2) + \sum_{i < j}\rho_{ij}\sigma_i\sigma_j\right)
+\end{equation}
+where $\sigma_i$ is the standard deviation of variable $i$ while $\rho_{ij}$ is the correlation between $i$ and $j$. The second term of (\ref{eq:1}) is the correlation dependent variance component, which goes to 0 if there is no correlation. Wu et al. \cite{wu2012} also showed that a null distribution estimated from a column permuted matrix does not account for this variance inflation, since the permutation procedure disrupts the natural correlation structure of the original variables. 
+
+The cILR statistic follows a similar pattern. Since the geometric mean of a set of variables is equivalent to the exponential of the arithmetic mean of their logarithms, we can re-write cILR for a set $k$ with size $\kappa$ as follows:  
+\begin{equation}\label{eq:2}
+    cILR_k = \sqrt{\frac{\kappa(p - \kappa)}{\kappa + (p - \kappa)}} \left( \overbar{\log{X_{j|j \in K}}} - \overbar{\log{X_{j|j \notin K}}} \right)   
+\end{equation}
+where $p$ is the overall number of taxa, $j$ is the index of a taxa and $K$ is the set of indices of taxa in set $k$. As such, the variance of the cILR test statistic is therefore dependent on the variance inflation of both mean components $\overbar{\log{X_{j|j \in K}}}$ and $\overbar{\log{X_{j|j \notin K}}}$.
+
+In order to address this variance inflation due to correlation issue, we chose to combine the location (or mean) estimate from the column permuted raw score matrix with the spread (or variance) estimate from the original un-permuted scores. This allows us to take advantage of the null distribution formed via variable permutation while accounting for the variance which was estimated from scores where the correlation structure has not been disrupted. As such, this procedure assumes that the 
+
+\section{Performance evaluation} 
+
+\section{p-value distribution}
 
 \newpage
 \bibliography{tax_agg}{}
-\bibliographystyle{plain}
+\bibliographystyle{plos2015}
 
 \end{document}
