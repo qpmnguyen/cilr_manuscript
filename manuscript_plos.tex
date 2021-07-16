@@ -400,15 +400,21 @@ These observations were replicated when assessed on the semi-labeled gingival da
 cILR generates sample-specific scores representing the degree of enrichment of a pre-defined set. As such, we want to assess the ability to use these scores for differential abundance analysis in combination with a standard difference of means statistical test (Welch's t-test and Wilcoxon rank sum test). We compared the performance of this approach with cILR and two commonly used methods for differential abundance testing in the microbiome literature: DESeq2 \cite{love2014} and corncob \cite{martin2020}.   
 
 \subsubsection*{Simulation studies}
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width = \textwidth]{figures/sim_diff_ab_comb.png}
+    \caption{Placeholder} 
+    \label{fig:4}
+\end{figure}
 \subsubsection*{Real data evaluations}
-We also evaluated performance of the methods on real 16S rRNA gene sequencing data set from HMP. For type I error evaluations, we use stool samples and randomly assign them with case/control status and calculated type I error as the proportion of genera identified as significantly different. For true positive rate evaluations, we use the gingival data set as detailed in the previous section, and calculated the true positive rate as the proportion of genera labeled as either anaerobic or aerobic that were found to be significant.   
+We also evaluated performance of the methods on real 16S rRNA gene sequencing data set from HMP (Fig~\ref{fig:5}). For type I error evaluations, we use stool samples and randomly assign them with case/control status and calculated type I error as the proportion of genera identified as significantly different. For true positive rate evaluations, we use the gingival data set as detailed in the previous section, and calculated the true positive rate as the proportion of genera labeled as either anaerobic or aerobic that were found to be significant.   
 We observed both corncob and DESeq2 had significantly inflated type I error rate while all variations of cILR were controlling for type I error at the defined $\alpha$ threshold of 0.05. Conversely, true positive rate for all methods were roughly more similar. As expected, using the Wilcoxon rank sum test demonstrated have power true positive rate, but the difference was not large. Surprisingly, using Welch's t-test demonstrated similar true positive rate as both corncob and DESeq2, while also controlling for type I error. Choice of underlying distribution for cILR did not seem to alter performance. 
 
 \begin{figure}[!ht]
     \centering
     \includegraphics[width = \textwidth]{figures/data_diff_ab.png}
     \caption{Differential abundance analysis using corncob, DESeq2 and cILR with either Wilcoxon rank sum test or Welch's t-test. Panel \textbf{(A)} shows type I error results as the proportion of significant genera after 500 iterations where case/control status was assigned randomly to each sample. Panel \textbf{(B)} shows true positive rate results as the proportion of significant genera who are either obligate anaerobes or aerobes. Both evaluations use 16S rRNA gene sequencing data from HMP. Type I error evaluation used stool samples while the true positive rate evaluation used samples from the gingival site. Results showed that cILR associated methods were able to keep type I error rate at approximately 0.05 while still demonstrating similar power as both corncob and DESeq2} 
-    \label{fig:4}
+    \label{fig:5}
 \end{figure}
 
 \subsection*{Disease Prediction}   
