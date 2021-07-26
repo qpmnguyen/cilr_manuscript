@@ -49,8 +49,20 @@ For the normal distribution, it is straightforward to combine mean and variance 
 $\lambda'_1$, $\lambda'_2$, $\mu'_1$, $\mu'_2$, and $M'$ are component-wise mixing coefficients, component-wise means, and overall mean of the mixture distribution estimated from column-permuted scores while $SD$ is the overall standard deviation of the mixture distribution estimated from unpermuted scores. We solve for this optimization problem using a quasi Newton method with box constraints (L-BFGS-B) with the default finite-difference approximation of the gradient, as implemented in the \emph{optim} function in R.   
 
 \section{Performance evaluation} 
+We implemented cILR in the package \emph{teaR} on GitHub with \emph{Rcpp} implementations for geometric mean computations. We evaluated computational time using the \emph{bench} package in R. Sample size and number of sets were varied across different evaluation conditions. All set sizes were kept constant at 50. 
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{figures/performance.png}
+    \caption{Computational time (in seconds) as a function of sample size (left panel) and number of taxa sets evaluated (right panel). Evaluation was performed on simulated data sets. For sample size analysis, only 10 sets were evaluated. For taxa set analysis, sample size was fixed at 1,000. Across all evaluations, the size of each taxa set was also fixed at 50.}
+    \label{fig:s1}
+\end{figure}
+
+In general, increasing sample size and number of evaluated sets both increase computational time. The mixture normal distribution takes longer to compute compared to the normal distribution, and adjusted methods take longer but was most apparent when combined with the mixture distribution. Overall, a reasonable data set of 1,000 samples and 100 sets (5,000 taxa) would take around 200 seconds (or approximately 3 minutes) for the longest approach (correlation adjusted mixture normal distribution). Benchmark was performed on a single core using a personal Windows laptop (Specifications: Intel Core i7-9750H (2.6-4.5 GHz - 12MB Cache) with 16GB of RAM)
 
 \section{Distribution of p-values}
+We also demonstrate the validity our inference procedure by assessing the distribution of p-values. We used simulated data sets as described in the main manuscript, under different data sparsity levels (0, 0.6) and inter-taxa correlation within the set ($\rho$ = 0, 0.5). We evaluated p-values of the correlation adjusted method for $\rho = 0.5$ case and the p-values of the unadjusted method for $\rho = 0$ case.  
+
 
 \newpage
 \bibliography{tax_agg}{}
