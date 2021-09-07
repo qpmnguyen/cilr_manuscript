@@ -298,9 +298,9 @@ We can apply prior usage of the ILR statistic in hypothesis testing to cILR by a
 
 This assumption is also supported by preliminary simulation studies (detailed below). In panel A of Fig~\ref{fig:1}, we simulated microbiome taxonomic count data under the global null across different data features and compute raw cILR scores and compute kurtosis and skewness. It can be seen that the characteristics of the null change depending on sparsity and inter-taxa correlation. Sparsity seems to drive the distribution to be more positively skewed while inter-taxa correlation encourages platykurtic (negative kurtosis). The effect is most dramatic under both high inter-taxa correlation and sparsity. This heterogeneity further supports the decision to estimate an empirical null distribution, similar to Efron \cite{efron2004}. 
 
-\begin{figure} [!ht]
+\begin{figure} [!h]
     \centering
-    %\includegraphics[width=\linewidth]{figures/kurtosis_skewness_gof.png}
+    \includegraphics[width=\linewidth]{figures/kurtosis_skewness_gof.png}
     \caption{{\bf Properties of the null distribution of cILR under the global null simulations}. Panel \textbf{(B)} presents kurtosis and skewness of cILR scores while panel \textbf{(A)} presents the goodness of fit (as Kolmogorov-Smirnov D statistic) for mixture normal and normal distributions. Panel \textbf{(C)} is a density plot of the shape of the null distribution. Results indicated the necessity of estimating an empirical null and demonstrating that the mixture distribution was the better fit compared to the basic normal.}
     \label{fig:1}
 \end{figure}
@@ -373,9 +373,9 @@ cILR provides significance testing for enrichment at the sample level using the 
 \subsubsection*{Simulation studies}
 Panel A and B in Fig~\ref{fig:2} demonstrate type I error and power respectively across different simulation conditions. We benchmarked the results of the cILR method against a naive Wilcoxon rank sum test performed at the sample level, comparing the mean count difference between taxa in the set its complement. All methods demonstrate good type I error control at $\alpha = 0.05$ under zero correlation across all simulation conditions. However, under both medium ($\rho = 0.2$) and high ($\rho = 0.5$) correlation settings, both the Wilcoxon test and unadjusted cILR variants show high levels of inflated type I error, where Wilcoxon test performed the worst. On the other hand, adjusted cILR methods (under both distributions) control for type I error at the appropriate $\alpha$ level even at high correlations. 
 
-\begin{figure}[!ht]
+\begin{figure}[!h]
     \centering
-    %\includegraphics[width=\textwidth]{figures/sim_data_ss_hypo.png}
+    \includegraphics[width=\textwidth]{figures/sim_data_ss_hypo.png}
     \caption{Sample-level inference with cILR under parametric simulations (\textbf{(A)} and \textbf{B}), and real data analysis (\textbf{(C)} and \textbf{(D)}). In simulation analyses, panel \textbf{(A)} shows type I error rate, and panel \textbf{(B)} shows power for single sample enrichment test for a specified set and was compared against a Wilcoxon rank sum test at $\alpha$ of 0.05. In real data analysis, panel \textbf{(C)} shows the false-positive rate, and panel \textbf{(D)} shows the true positive rate. For this analysis, 16S rRNA data from the oral microbiome of the gingival site was used. The set of aerobic microbes was tested for enrichment in all samples and was identified as correctly enriched if a significant $p$-value was obtained in supragingival samples. Confidence bounds were obtained using Agresti-Couli \cite{agresti1998} approach. Adjusted cILR demonstrated control of type I error at the appropriate $\alpha$ level while remaining methods (not included in subsequent power analyses) showed an inflated type I error rate. However, this resulted in lower power for adjusted cILR methods.}
     \label{fig:2}
 \end{figure}
@@ -387,9 +387,9 @@ To further assess the utility of cILR in classifying samples with enriched sets,
 \subsubsection*{Real data evaluations}  
 These observations were replicated when assessed on the semi-labeled gingival data set from the Human Microbiome Project as described in \nameref{methods}. Here, we tested the enrichment of aerobic microbes for each sample using approaches similar to our parametric simulations. As expected in Fig~\ref{fig:2}C, the proportion of falsely rejected hypotheses was high in the naive Wilcoxon test and unadjusted cILR methods. Conversely, adjusted cILR controls for false positives adequately at the correct $\alpha$ level of 0.05. Power analysis (Fig~\ref{fig:2}D) showed similar patterns, where unadjusted cILR methods and the Wilcoxon test have a higher proportion of null hypotheses correctly rejected, however, these results are not useful to a practitioner as the number of falsely rejected hypotheses are also equally high.  
 
-\begin{figure}[!ht]
+\begin{figure}[!h]
     \centering
-    %\includegraphics[width = \textwidth]{figures/sim_data_ss_auc.png}
+    \includegraphics[width = \textwidth]{figures/sim_data_ss_auc.png}
     \caption{Classification performance via AUC of cILR, ssGSEA, GSVA, and Wilcoxon $U$ statistic on simulated data \textbf{(A)} the gingival data set from the Human Microbiome Project  \textbf{(B)} as detailed in \nameref{methods}. Performance scores measure whether scores can highly rank samples that are known to have inflated abundance. In the gingival data set presented in panel \textbf{(B)}, samples from the supragingival site are assumed to have an inflated abundance of aerobic microbes. Error bars are the 95\% DeLong confidence intervals for AUC \cite{delong1988}} 
     \label{fig:3}
 \end{figure}
@@ -398,9 +398,9 @@ These observations were replicated when assessed on the semi-labeled gingival da
 cILR generates sample-specific scores representing the degree of enrichment of a pre-defined set. As such, we want to assess the ability to use these scores for differential abundance analysis in combination with a standard difference of means statistical test (Welch's t-test and Wilcoxon rank sum test). We compared the performance of this approach with cILR and two commonly used methods for differential abundance testing in the microbiome literature: DESeq2 \cite{love2014} and corncob \cite{martin2020}.   
 
 \subsubsection*{Simulation studies}
-\begin{figure}[!ht]
+\begin{figure}[!h]
     \centering
-    %\includegraphics[width = \textwidth]{figures/sim_diff_ab_comb.png}
+    \includegraphics[width = \textwidth]{figures/sim_diff_ab_comb.png}
     \caption{Type I error rate \textbf{(A)} and power \textbf{(B)} for differential abundance test across different parametric simulation scenarios. For cILR methods, differential abundance analysis was performed using a difference in means test (either Wilcoxon rank-sum test or Welch's t-test) across case/control status using single sample scores generated by cILR (across different output types and distributional assumptions). cILR associated methods demonstrated similar type I error to conventional differential abundance analysis methods but with more power to detect differences even at small effect sizes.} 
     \label{fig:4}
 \end{figure}
@@ -416,9 +416,9 @@ We observed both corncob and DESeq2 had significantly inflated type I error rate
 
 In true positive experiments with data from the gingival site, estimated rates were more similar across the different methods. As expected, using the Wilcoxon rank sum test resulted in lower true positive rate compared to remaining methods, but the difference was not noticable. This is also surprising given that in simulation studies, both corncob and DESeq2 showed markedly lower power across all effect sizes.  
 
-\begin{figure}[!ht]
+\begin{figure}[!h]
     \centering
-    %\includegraphics[width = \textwidth]{figures/data_diff_ab.png}
+    \includegraphics[width = \textwidth]{figures/data_diff_ab.png}
     \caption{Differential abundance analysis using corncob, DESeq2 and cILR with either Wilcoxon rank sum test or Welch's t-test. Panel \textbf{(A)} shows type I error results as the proportion of significant genera after 500 iterations where case/control status was assigned randomly to each sample. Panel \textbf{(B)} shows true positive rate results as the proportion of significant genera who are either obligate anaerobes or aerobes. Both evaluations use 16S rRNA gene sequencing data from HMP. Type I error evaluation used stool samples while the true positive rate evaluation used samples from the gingival site. Results showed that cILR associated methods were able to keep type I error rate at approximately 0.05 while still demonstrating similar power as both corncob and DESeq2} 
     \label{fig:5}
 \end{figure}
@@ -430,9 +430,9 @@ Fig~\ref{fig:6} shows results for simulation studies as detailed in the \nameref
 
 In this analysis, cILR unfortunately did not outperform the CLR approach, which is standard practice within the microbiome literature \cite{gloor2017}. This difference in performance is more notable in regression learning tasks compared to classification, and at lower levels of effect saturation. However, the degree of separation between the two approaches is not as dramatic as between GSVA/ssGSEA and cILR/CLR. Moreover, the performance gap decreases with increasing effect signal-to-noise ratio and sparsity. Additionally, we did not observe any performance difference between the different variations of cILR. 
 
-\begin{figure}[!ht]
+\begin{figure}[!h]
     \centering
-    %\includegraphics[width = \linewidth]{figures/sim_pred_combined.png}
+    \includegraphics[width = \linewidth]{figures/sim_pred_combined.png}
     \caption{Predictive performance of a naive random forest model trained on cILR, ssGSEA, GSVA generated scores as well as the standard CLR approach on simulated across different levels of data sparsity, inter-taxa correlation, effect saturation, and signal-to-noise ratio. Panel \textbf{(A)} presents performance on a regression task using predictive R-squared as the evaluation measure. Panel \textbf{(B)} presents performance on a classification task with AUC as the evaluation measure. cILR approaches outperformed GSVA and ssGSEA across all simulation conditions but not the CLR approach.}
     \label{fig:6}
 \end{figure}
@@ -448,9 +448,9 @@ In this analysis, cILR unfortunately did not outperform the CLR approach, which 
 \subsubsection*{Real data evaluations}
 In addition to parametric simulations, we also assessed the performance of using cILR scores in predictive models with real data sets. Fig~\ref{fig:7} presents results for two data sets with a similar disease classification task of discriminating patients who are diagnosed with IBD (includes both Crohn's disease and ulcerative colitis) using only microbiome taxonomic composition. The two data sets represent different microbiome sequencing aprpaoches: the Gevers et al. \cite{gevers2014} data set uses 16S rRNA gene sequencing, while the Nielsen et al \cite{nielsen2014} data set uses whole genome shotgun sequencing. 
 
-\begin{figure}[!ht]
+\begin{figure}[!h]
     \centering
-    %\includegraphics[scale = 0.6]{figures/data_prediction_plot.png}
+    \includegraphics[width = \linewidth]{figures/data_prediction_plot.png}
     \caption{Predictive performance of a naive random forest model trained on cILR, ssGSEA, GSVA generated scores as well as the standard CLR approach on predicting patients with inflammatory bowel disease versus controls using genus level taxonomic profiles. Data sets used span both 16S rRNA gene sequencing (Gevers et al. \cite{gevers2014}) and whole-genome shotgun sequencing (Nielsen et al. \cite{nielsen2014}). cILR performs better than GSVA and ssGSEA but not as well as CLR, with the exception of the whole genome sequencing data set.}
     \label{fig:7}
 \end{figure}
