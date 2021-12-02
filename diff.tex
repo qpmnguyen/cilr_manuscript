@@ -264,12 +264,16 @@
 \vspace*{0.2in}
 
 % Title must be 250 characters or less.
-\begin{flushleft}
+\DIFdelbegin %DIFDELCMD < \begin{flushleft}
+%DIFDELCMD < {\Large
+%DIFDELCMD < \textbf\newline{cILR: Competitive isometric log-ratio for taxonomic enrichment analysis} % Please use "sentence case" for title and headings (capitalize only the first word in a title (or heading), the first word in a subtitle (or subheading), and any proper nouns).
+%DIFDELCMD < }
+%DIFDELCMD < %%%
+\DIFdelend \DIFaddbegin \begin{flushleft}
 {\Large
-\textbf\DIFdelbegin %DIFDELCMD < \newline{cILR: Competitive isometric log-ratio for taxonomic enrichment analysis} %%%
-\DIFdelend \DIFaddbegin \newline{CBEA: Competitive balances for taxonomic enrichment analysis} \DIFaddend % Please use "sentence case" for title and headings (capitalize only the first word in a title (or heading), the first word in a subtitle (or subheading), and any proper nouns).
+\textbf\newline{CBEA: Competitive balances for taxonomic enrichment analysis} % Please use "sentence case" for title and headings (capitalize only the first word in a title (or heading), the first word in a subtitle (or subheading), and any proper nouns).
 }
-\newline
+\DIFaddend \newline
 % Insert author names, affiliations and corresponding author email (do not include titles, positions, or degrees).
 \\
 Quang P. Nguyen\textsuperscript{1,2},
@@ -806,8 +810,7 @@ The authors thank Becky Lebeaux, Modupe Coker, Erika Dade, Jie Zhou, and Weston 
 
 %DIFDELCMD < \bibitem{callahan2016}
 \DIFdel{Callahan BJ, McMurdie PJ, Rosen MJ, Han AW, Johnson AJA, Holmes SP.
-}%DIFDELCMD < \newblock {{%%%
-\DIFdel{DADA2}%DIFDELCMD < }}%%%
+}%DIFDELCMD < \newblock {{DADA2}}%%%
 \DIFdel{: }%DIFDELCMD < {{%%%
 \DIFdel{High}%DIFDELCMD < }}%%%
 \DIFdel{-Resolution Sample Inference from }%DIFDELCMD < {{%%%
@@ -824,8 +827,7 @@ The authors thank Becky Lebeaux, Modupe Coker, Erika Dade, Jie Zhou, and Weston 
 
 %DIFDELCMD < \bibitem{truong2015}
 \DIFdel{Truong DT, Franzosa EA, Tickle TL, Scholz M, Weingart G, Pasolli E, et~al.
-}%DIFDELCMD < \newblock {{%%%
-\DIFdel{MetaPhlAn2}%DIFDELCMD < }} %%%
+}%DIFDELCMD < \newblock {{MetaPhlAn2}} %%%
 \DIFdel{for Enhanced Metagenomic Taxonomic Profiling.
 }%DIFDELCMD < \newblock %%%
 \DIFdel{Nature Methods. 2015;12(10):902--903.
@@ -888,8 +890,7 @@ The authors thank Becky Lebeaux, Modupe Coker, Erika Dade, Jie Zhou, and Weston 
 
 %DIFDELCMD < \bibitem{sankaran2014}
 \DIFdel{Sankaran K, Holmes S.
-}%DIFDELCMD < \newblock {{%%%
-\DIFdel{structSSI}%DIFDELCMD < }}%%%
+}%DIFDELCMD < \newblock {{structSSI}}%%%
 \DIFdel{: }%DIFDELCMD < {{%%%
 \DIFdel{Simultaneous}%DIFDELCMD < }} %%%
 \DIFdel{and }%DIFDELCMD < {{%%%
@@ -1162,8 +1163,7 @@ The authors thank Becky Lebeaux, Modupe Coker, Erika Dade, Jie Zhou, and Weston 
 \DIFdel{H}%DIFDELCMD < {%%%
 \DIFdel{\"a}%DIFDELCMD < }%%%
 \DIFdel{nzelmann S, Castelo R, Guinney J.
-}%DIFDELCMD < \newblock {{%%%
-\DIFdel{GSVA}%DIFDELCMD < }}%%%
+}%DIFDELCMD < \newblock {{GSVA}}%%%
 \DIFdel{: Gene Set Variation Analysis for Microarray and
   }%DIFDELCMD < {{%%%
 \DIFdel{RNA}%DIFDELCMD < }}%%%
@@ -1557,8 +1557,7 @@ The authors thank Becky Lebeaux, Modupe Coker, Erika Dade, Jie Zhou, and Weston 
 
 %DIFDELCMD < \bibitem{schiffer2019}
 \DIFdel{Schiffer L, Azhar R, Shepherd L, Ramos M, Geistlinger L, Huttenhower C, et~al.
-}%DIFDELCMD < \newblock {{%%%
-\DIFdel{HMP16SData}%DIFDELCMD < }}%%%
+}%DIFDELCMD < \newblock {{HMP16SData}}%%%
 \DIFdel{: }%DIFDELCMD < {{%%%
 \DIFdel{Efficient}%DIFDELCMD < }} %%%
 \DIFdel{Access to the Human Microbiome Project
@@ -1757,8 +1756,10 @@ The authors thank Becky Lebeaux, Modupe Coker, Erika Dade, Jie Zhou, and Weston 
 
 % Include only the SI item label in the paragraph heading. Use the \nameref{label} command to cite SI items in the text.
 \paragraph*{S1 Fig.}
-\label{S1_Fig}
-{\bf Computational performance of \DIFdelbegin \DIFdel{cILR}\DIFdelend \DIFaddbegin \DIFadd{CBEA}\DIFaddend .} Computational time (in seconds) as a function of sample size (left panel) and number of taxa sets evaluated (right panel). Evaluation was performed on simulated data sets. For sample size analysis, only 10 sets were evaluated. For taxa set analysis, sample size was fixed at 1,000. Across all evaluations, the size of each taxa set was also fixed at 50. 
+\DIFdelbegin %DIFDELCMD < \label{S1_Fig}
+%DIFDELCMD < {\bf Computational performance of cILR.} %%%
+\DIFdelend \DIFaddbegin \label{S1_Fig}
+{\bf Computational performance of CBEA.} \DIFaddend Computational time (in seconds) as a function of sample size (left panel) and number of taxa sets evaluated (right panel). Evaluation was performed on simulated data sets. For sample size analysis, only 10 sets were evaluated. For taxa set analysis, sample size was fixed at 1,000. Across all evaluations, the size of each taxa set was also fixed at 50. 
 
 \paragraph*{S2 Fig.}
 \label{S2_Fig}
