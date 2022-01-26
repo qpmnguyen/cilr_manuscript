@@ -380,6 +380,12 @@ Fig~\ref{fig:2} demonstrates type I error of sample-level inference evaluated us
 
 \subsection*{Phenotype Relevance}. 
 
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width = \textwidth]{figures/data_ss_pwr_new.png}
+    \caption{Random taxa set analyses for inference at the sample level of CBEA under different parametric assumptions compared against a Wilcoxon rank-sum test. Type I error (\emph{y}-axis) was evaluated by generating random sets of different sizes (\emph{x}-axis) (500 replications per size) and computing the fraction of samples where the set was found to be significantly enriched at $\alpha = 0.05$. Confidence bands represent the mean type I error $\pm$ sample standard error computed across 500 replications of the experiment.} 
+    \label{fig:3}
+\end{figure}
 
 
 However, the trade-off for good type I error control is demonstrably lower power, as shown in Fig~\ref{fig:2}B. In situations where there is no inter-taxa correlation, CBEA still outperforms the wilcoxon rank sum test, however adjusted versions of CBEA did not perform as well as un-adjusted ones. However, in higher correlation scenarios, the difference in power is much more dramatic. At the highest effect size (fold change of 3) and correlation ($\rho = 0.5$), adjusted CBEA was only performing at 50\% power, while unadjusted CBEA and wilcoxon rank sum test were able to reach 80\%. These results indicate that both sparsity and inter-taxa correlation impacts power, with correlation having a much more dramatic impact especially for adjusted versions of CBEA. Most importantly, CBEA demonstrate higher power in all scenarios where type I error is properly controlled.    
