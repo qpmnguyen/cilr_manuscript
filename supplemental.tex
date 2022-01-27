@@ -11,7 +11,7 @@
 \usepackage[parfill]{parskip}
 \newcommand{\overbar}[1]{\mkern 2mu\overline{\mkern-2mu#1\mkern-20mu}\mkern 20mu}
 
-\title{Supplementary Materials for cILR: Taxonomic enrichment analysis with isometric log ratios}
+\title{Supplementary Materials for CBEA: Competitive Balances for Taxonomic Enrichment Analysis}
 \begin{document}
 \author{Quang P. Nguyen, Anne G. Hoen, H. Robert Frost}
 \maketitle
@@ -19,23 +19,10 @@
 
 
 \section{Addressing variance inflation due to correlation}
-In order to perform inference with competitive isometric log ratio (cILR), we estimated the null distribution empirically following Efron et al. \cite{efron2004}. We chose two distributional forms for the null: the normal distribution and a two-component mixture normal distribution. Subsequently, we estimated the parameters of the respective distributions from a column (or variable) permuted raw score matrix. This means that our null distribution for a given set is equivalent to scores computed for sets of similar sizes but containing randomly chosen taxa. For the normal distribution, we estimated parameters using the maximum likelihood using the \emph{fitdistrplus} package \cite{delignette-muller2015}. For the mixture normal distribution, we utilized the expectation-maximization procedure from the package \emph{mixtools} \cite{benaglia2009}. 
 
-However, when variables are correlated, the variance of the sample mean of the variables is inflated \cite{wu2012}. Without loss of generalizability, for a set of variables $x_1, ..., x_p$ we have the variance of the mean $\bar{x}$ to be:  
-\begin{equation} \label{eq:1}
-    Var(\bar{x}) = \frac{1}{m^2}\left(\sum_{i = 1}(\sigma_i^2) + \sum_{i < j}\rho_{ij}\sigma_i\sigma_j\right)
-\end{equation}
-where $\sigma_i$ is the standard deviation of variable $i$ while $\rho_{ij}$ is the correlation between $i$ and $j$. The second term of (\ref{eq:1}) is the correlation dependent variance component, which goes to 0 if there is no correlation. Wu et al. \cite{wu2012} showed that a null distribution estimated from a column permuted matrix does not account for this variance inflation, since the permutation procedure disrupts the natural correlation structure of the original variables. 
+In order to perform inference with CBEA, we estimated the null distribution empirically. This can be done either non-parametrically by constructing a null distribution through computing scores on multiple permutations of the data, or parametrically via estimating parameters of a distribution using the same permuted scores. This means that our null distribution for a given set is equivalent to scores computed for sets of similar sizes but containing randomly chosen taxa. We chose two distributional forms for the null: the normal distribution and a two-component mixture normal distribution. For the normal distribution, we estimated parameters using the maximum likelihood using the \emph{fitdistrplus} package \cite{delignette-muller2015}. For the mixture normal distribution, we utilized the expectation-maximization procedure from the package \emph{mixtools} \cite{benaglia2009}. 
 
-The cILR statistic follows a similar pattern. Since the geometric mean of a set of variables is equivalent to the exponential of the arithmetic mean of their logarithms, we can re-write cILR for a set $k$ with size $\kappa$ as follows:  
-\begin{equation}\label{eq:2}
-    cILR_k = \sqrt{\frac{\kappa(p - \kappa)}{\kappa + (p - \kappa)}} \left( \overbar{\log{X_{j|j \in K}}} - \overbar{\log{X_{j|j \notin K}}} \right)   
-\end{equation}
-where $p$ is the overall number of taxa, $j$ is the index of a taxa and $K$ is the set of indices of taxa in set $k$. The cILR statistic then looks similar to a t-statistic for difference in means of log-transformed proportions. As such, the pooled variance of cILR is dependent on the variance inflation of both mean components $\overbar{\log{X_{j|j \in K}}}$ and $\overbar{\log{X_{j|j \notin K}}}$. 
-
-It is important to address this problem since there is strong inter-taxa correlation within the microbiome \cite{kurtz2015}. Even though Wu et al. proposed a correlation adjusted t-statistic for the CAMERA method \cite{wu2012}, it is difficult to adapt such modifications to the cILR statistic. This is because CAMERA requires an estimation procedure for pair-wise correlations of the $\log{X_j}$, as well as making the assumption that the marginal variance of each $\log{X_j}$ is equivalent to each other. 
-
-Instead, our strategy is to combine the location (or mean) estimate from the column permuted raw score matrix with the spread (or variance) estimate from the original un-permuted scores. This still allows us to leverage the null generated via column permutation while using the proper variance estimate taken from scores where the correlation structure has not been disrupted. As such, this procedure assumes that the variance of the test statistic under the alternate hypothesis is the same as that of the null.  
+An advantage of estimating the null using a parametric approach is the ability to correct for variance inflation due to inter-taxa correlation within the set compared to overall background correlation \cite{wu2012}. CBEA addresses this issue by combining the location (or mean) estimate from the column permuted raw score matrix with the spread (or variance) estimate from the original un-permuted scores. This still allows us to leverage the null generated via column permutation while using the proper variance estimate taken from scores where the correlation structure has not been disrupted. As such, this procedure assumes that the variance of the test statistic under the alternate hypothesis is the same as that of the null.  
 
 For the normal distribution, it is straightforward to combine mean and variance estimates from the respective raw score matrices. For the mixture normal distribution, however, due to the fact that the distribution is made of component-wise means, variances and mixing coefficients, we decided to take an optimization based approach to identifying the component wise variances $\sigma_1$ and $\sigma_2$ such the overall mean and variance estimates come from the respective raw cILR score matrices as detailed above. We can write the optimization problem as follows: 
 
@@ -46,7 +33,15 @@ For the normal distribution, it is straightforward to combine mean and variance 
     \textrm{where} \quad & M', SD, \mu'_1, \mu'_2, \lambda'_1, \lambda'_2 \text{ are constants} \\
 \end{aligned}
 \end{equation}
-$\lambda'_1$, $\lambda'_2$, $\mu'_1$, $\mu'_2$, and $M'$ are component-wise mixing coefficients, component-wise means, and overall mean of the mixture distribution estimated from column-permuted scores while $SD$ is the overall standard deviation of the mixture distribution estimated from unpermuted scores. We solve for this optimization problem using a quasi Newton method with box constraints (L-BFGS-B) with the default finite-difference approximation of the gradient, as implemented in the \emph{optim} function in R.   
+
+$\lambda'_1$, $\lambda'_2$, $\mu'_1$, $\mu'_2$, and $M'$ are component-wise mixing coefficients, component-wise means, and overall mean of the mixture distribution estimated from column-permuted scores while $SD$ is the overall standard deviation of the mixture distribution estimated from unpermuted scores. We solve for this optimization problem using a quasi Newton method with box constraints (L-BFGS-B) with the default finite-difference approximation of the gradient, as implemented in the \emph{optim} function in R. 
+
+There are also different variations to this approach. We can choose to vary both $\sigma_1$ and $\sigma_2$ or to keep either $\sigma_1$ or $\sigma_2$ constant and varying the remaining component. We can assume that null distribution is a two-component mixture distribution where there is one major component with smaller mean (representing the bulk of the distribution centered at the permuted mean) and one minor component with higher mean (representing the inflated right tail). Under this assumption, we can modify the optimization problem to only estimate the variance parameter of the smaller component (i.e. withouth loss of generalizability keeping $\sigma_1$ constant where $\lambda'_1 > \lambda'_2$). This allows for the optimization procedure to more properly capture the right tail distribution rather than increasing weight on the left tail of the distribution which impacts the computation of p-values for a one-sided test. Empirical experiments (data not shown) done on simulated data and random set analyses suggest that this adjustment improves performance of the adjusted CBEA under mixture-normal assumption. In the R implementation of CBEA, users can control this behaviour by specifying the 
+
+
+
+
+
 
 \section{Performance evaluation} 
 We implemented cILR in the package \emph{teaR} on GitHub with \emph{Rcpp} implementations for geometric mean computations. We evaluated computational time using the \emph{bench} package in R. Sample size and number of sets were varied across different evaluation conditions. All set sizes were kept constant at 50. 
@@ -73,7 +68,7 @@ In general, sparsity has no effect on the distribution of p-values, where it rem
 \end{figure}
 
 \newpage
-\bibliography{tax_agg}{}
+\bibliography{mac_taxagg}{}
 \bibliographystyle{plos2015}
 
 \end{document}
