@@ -84,3 +84,16 @@ In true positive experiments with data from the gingival site, estimated rates w
     \caption{Differential abundance analysis using corncob, DESeq2 and CBEA with either Wilcoxon rank sum test or Welch's t-test. Panel \textbf{(A)} shows type I error results as the proportion of significant genera after 500 iterations where case/control status was assigned randomly to each sample. Panel \textbf{(B)} shows true positive rate results as the proportion of significant genera who are either obligate anaerobes or aerobes. Both evaluations use 16S rRNA gene sequencing data from HMP. Type I error evaluation used stool samples while the true positive rate evaluation used samples from the gingival site. Results showed that CBEA associated methods were able to keep type I error rate at approximately 0.05 while still demonstrating similar power as both corncob and DESeq2} 
     \label{fig:5}
 \end{figure}
+
+\subsection{Prediction analysis}
+\subsubsection*{Simulation studies}
+Fig~\ref{fig:6} shows results for simulation studies as detailed in the \nameref{methods} section. Panel A presents results for a regression learning task with a continuous outcome while panel B presents results for a classification task with a binary outcome. As expected, performance across all assessed methods increased with a higher signal-to-noise ratio. Both CLR and CBEA approaches outperformed both GSVA and ssGSEA across all simulation conditions and learning tasks. This is because both GSVA and ssGSEA are more sensitive to the degree of inter-taxa correlation and sparsity, while CBEA and CLR did not experience a similar level of impact. As such, performance gap widens with increasing correlation and sparsity. Interestingly, this difference in performance is not as pronounced under high levels of effect saturation (across both learning tasks), suggesting that when there is a high number of sets contributing to an effect, model choice might not be as important.   
+
+In this analysis, CBEA unfortunately did not outperform the CLR approach, which is standard practice within the microbiome literature \cite{gloor2017}. This difference in performance is more notable in regression learning tasks compared to classification, and at lower levels of effect saturation. However, the degree of separation between the two approaches is not as dramatic as between GSVA/ssGSEA and CBEA/CLR. Moreover, the performance gap decreases with increasing effect signal-to-noise ratio and sparsity. Additionally, we did not observe any performance difference between the different variations of CBEA. 
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width = \linewidth]{figures/sim_pred_combined.png}
+    \caption{Predictive performance of a naive random forest model trained on CBEA, ssGSEA, GSVA generated scores as well as the standard CLR approach on simulated across different levels of data sparsity, inter-taxa correlation, effect saturation, and signal-to-noise ratio. Panel \textbf{(A)} presents performance on a regression task using predictive R-squared as the evaluation measure. Panel \textbf{(B)} presents performance on a classification task with AUC as the evaluation measure. CBEA approaches outperformed GSVA and ssGSEA across all simulation conditions but not the CLR approach.}
+    \label{fig:6}
+\end{figure}
