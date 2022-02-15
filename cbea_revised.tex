@@ -244,9 +244,9 @@ The study of human associated microbiomes relies on genomic surveys via high-thr
 \section*{Introduction} \label{introduction}
 The microbiome is the collection of microorganisms (bacteria, protozoa, archaea, fungi, and viruses) which co-exist with their host. Previous research has shown that changes in the composition of the human gut microbiome are associated with important health outcomes such as inflammatory bowel disease \cite{proctor2019}, type II diabetes \cite{sharma2019a}, and obesity \cite{aoun2020}. To understand the central role of the microbiome in human health, researchers have relied on high-throughput sequencing methods, either by targeting a specific representative gene (i.e. amplicon sequencing) or by profiling all the genomic content of the sample (i.e. whole-genome shotgun sequencing) \cite{cho2012}. Raw sequencing data is then processed through a variety of bioinformatic pipelines \cite{callahan2016, truong2015}, yielding various data products, one of which are taxonomic tables which can be used to study associations between members of the microbiome and an exposure or outcome of interest. 
 
-However, there exists unique challenges in the analysis of these taxonomic count tables \cite{li2019a,li2015}. The data is sparse, high-dimensional, and likely compositional \cite{gloor2017, li2019a, li2015}. Even though these problems are challenging, a very approachable solution is to use set-based analysis methods, also termed gene set testing in the genomics literature \cite{khatri2012, goeman2007}. Aggregated variables can be less sparse, and testing on a smaller number of features can reduce the multiple-testing burden. As such, gene set testing methods have been shown to increase power and reproducibility of genomic analyses. Furthermore, through the usage of functionally informative sets defined apriori based on historical experiments (for example MSigDB \cite{subramanian2005}, and Gene Ontology \cite{ashburner2000}), gene set analysis also allows for more biologically informative interpretations. 
+However, there are unique challenges in the analysis of these taxonomic count tables \cite{li2019a,li2015}. The data is sparse, high-dimensional, and likely compositional \cite{gloor2017, li2019a, li2015}. Even though these problems are challenging, a very approachable solution is to use set-based analysis methods, also termed gene set testing in the genomics literature \cite{khatri2012, goeman2007}. Aggregated variables can be less sparse, and testing on a smaller number of features can reduce the multiple-testing burden. As such, gene set testing methods have been shown to increase power and reproducibility of genomic analyses. Furthermore, through the usage of functionally informative sets defined \emph{a priori} based on historical experiments (for example MSigDB \cite{subramanian2005}, and Gene Ontology \cite{ashburner2000}), gene set analysis also allows for more biologically informative interpretations. 
 
-There exists a diverse set of methods already developed in this field. Traditional methods utilize the hypergeometric distribution to test for the overrepresentation of a gene set using a candidate list of genes screened based on a marginal model \cite{goeman2007}. Unfortunately, these approaches are sensitive to the differential expression test as well as the chosen threshold when trying to select genes for the candidate list. Aggregate score methods, which are generally more preferred \cite{irizarry2009}, instead assigns a score for each gene set based on gene-specific statistics such as z-scores or fold change. Of these approaches, methods such as GSEA \cite{subramanian2005} performs a test for each gene set at the population level, summarizing information across all samples. Conversely, methods such as GSVA \cite{hanzelmann2013} and VAM \cite{frost2020}, generate enrichment scores at the sample level and are more akin to a transformation. In addition to being able to screen for enriched sets per sample, this strategy also allows for the flexible incorporation of different downstream analyses, such as fitting prediction models, or performing dimension reduction.  
+A diverse set of methods have already been developed in this field. Traditional methods utilize the hypergeometric distribution to test for the overrepresentation of a gene set using a candidate list of genes screened based on a marginal model \cite{goeman2007}. Unfortunately, these approaches are sensitive to the differential expression test as well as the chosen threshold when trying to select genes for the candidate list. Aggregate score methods, which are generally preferred \cite{irizarry2009}, instead assign a score for each gene set based on gene-specific statistics such as z-scores or fold change. Of these approaches, methods such as GSEA \cite{subramanian2005} perform a test for each gene set at the population level, summarizing information across all samples. Conversely, methods such as GSVA \cite{hanzelmann2013} and VAM \cite{frost2020}, generate enrichment scores at the sample level and are more akin to a transformation. In addition to being able to screen for enriched sets per sample, this strategy also allows for the flexible incorporation of different downstream analyses, such as fitting prediction models, or performing dimension reduction.  
 
 %First, like other sequencing-based datasets, microbiome count data is often high dimensional, where the number of detected taxa far exceeds the number of samples usually present. For predictive tasks, microbiome-specific penalized regression approaches have been developed to address this issue \cite{shi2016a}, allowing for simultaneous model fitting and variable selection. For differential abundance tasks, researchers often utilize multiple hypothesis correction methods \cite{sankaran2014,benjamini1995} or omnibus tests \cite{chen2018c} to address hypothesis testing burden. 
 
@@ -254,19 +254,19 @@ There exists a diverse set of methods already developed in this field. Tradition
 
 %Third, the data are highly sparse, where there is a high number of both structural zeros (truly missing due to biological reasons) and sampling zeroes (due to limits of detection of the sequencing experiment). Researchers often dealt with these issues by imputing zero cells with a pseudocount \cite{kurtz2015a}, or applying zero-inflated models \cite{chen2018c, kaul2017}. Newer methods developed recently have focused on understanding the different types of zeros in the data, providing more sophisticated heuristics around when pseudocounts can be utilized \cite{kaul2017a}.   
 
-In microbiome research, even though no explicit enrichment analysis is performed, researchers often aggregate taxa to higher Linnean classification levels such as genus, family, or phylum. However, despite this interest, there is limited research done to extend existing set-based methods to microbiome relative abundance data. Some software suites, such as \emph{MicrobiomeAnalyst}, do offer tools to perform enrichment testing with curated taxon sets \cite{chong2020}. However, the approach used in \emph{MicrobiomeAnalyst} is a form of overrepresentation analysis at the population level and therefore similarly sensitive to the differential abundance approach used and p-value threshold. One of the primary challenges for adapting gene set analysis to the microbiome context is the compositional nature of the data. Sequencing technologies constrain the total number of reads, and samples are expected to have the same number of reads instead of DNA content \cite{quinn2019, quinn2018}. However, different samples still yield arbitrarily different total read counts \cite{morton2019, gloor2017}, suggesting the use of normalization methods to allow for proper comparison of feature abundances across samples. However, microbiome data sets do not follow certain assumptions that enable the cross-application of methods from similar fields (such as RNA-seq) \cite{quinn2019, quinn2018}. For example, DESeq2's \emph{estimateSizeFactors} \cite{love2014} assumes that the majority of genes acts as housekeeping genes with constant expression levels across samples. As such, practitioners often rely on total sum normalization to transform count data into relative proportions that sum to one \cite{weiss2017}. Some studies have provided emprical performance vealuations supporting this normalization schema \cite{mcknight2019}. Since this approach imposes a sum constraint on the data, post normalization microbiome data sets are compositional \cite{gloor2017}, which means that the abundance of any taxa can only be interpreted relative to another. Under this scenario, log-ratio based approaches from the compositional data analysis (CoDA) literature \cite{aitchison1994} are motivated to address this issue. 
+In microbiome research, even when no explicit enrichment analysis is performed, researchers often aggregate taxa to higher Linnean classification levels such as genus, family, or phylum. However, there is limited research done to extend existing set-based methods to microbiome relative abundance data. Some software suites, such as \emph{MicrobiomeAnalyst}, do offer tools to perform enrichment testing with curated taxon sets \cite{chong2020}. However, the approach used in \emph{MicrobiomeAnalyst} is a form of overrepresentation analysis at the population level and therefore similarly sensitive to the differential abundance approach used and p-value threshold. One of the primary challenges for adapting gene set analysis to the microbiome context is the compositional nature of the data. Sequencing technologies constrain the total number of reads, and samples are expected to have the same number of reads instead of DNA content \cite{quinn2019, quinn2018}. However, different samples still yield arbitrarily different total read counts \cite{morton2019, gloor2017}, suggesting the use of normalization methods to allow for proper comparison of feature abundances across samples. However, microbiome data sets do not follow certain assumptions that enable the cross-application of methods from similar fields (such as RNA-seq) \cite{quinn2019, quinn2018}. For example, DESeq2's \emph{estimateSizeFactors} \cite{love2014} assumes that the majority of genes acts as housekeeping genes with constant expression levels across samples. As such, practitioners often rely on total sum normalization to transform count data into relative proportions that sum to one \cite{weiss2017}. Some studies have provided emprical performance vealuations supporting this normalization schema \cite{mcknight2019}. Since this approach imposes a sum constraint on the data, post normalization microbiome data sets are compositional \cite{gloor2017}, which means that the abundance of any taxon can only be interpreted relative to another. Under this scenario, log-ratio based approaches from the compositional data analysis (CoDA) literature \cite{aitchison1994} are motivated to address this issue. 
 
 Unfortunately, the standard practice for aggregating variables using element-wise summations (referred to as amalgamations in the CoDA literature), does not adequately address the compositional issue \cite{mclaren2019}. First, inter-sample Aitchison distances computed on original parts are not preserved after amalgamation \cite{egozcue2005}. This means that cluster analyses might show different results depending on the level of amalgamation and differs from the those computed from original variables. Second, amalgamations do not allow for comparison between sets of different sizes within the same experimental condition since larger sets will have larger means and variances. Third, considering that each taxa has specific measurement biases \cite{mclaren2019}, an amalgamation based approach would make the bias of the amalgamated variable dependent on the relative abundance of the its constituents. In other words, if taxon $1$ has abundance $A_1$ and bias $B_1$, while taxon $2$ has abundance $A_2$ and bias $B_2$, then the bias of the aggregate variable (for example, a genera) is $(A_1B_1 + A_2B_2)/(A_1 + A_2)$ (see Appendix 1. from McLaren et al. \cite{mclaren2019}). This means that bias invariant approaches (such as analyses of ratios) would no longer be invariant when applied to amalgamated variables as bias now varies across samples. The alternative would be to multiply the proportions rather than to sum them \cite{egozcue2005}. 
 
 Here, we present a taxon-set testing method for microbiome relative abundance data that addresses the aforementioned issues. Our approach generates enrichment scores at the sample level similar to GSVA \cite{hanzelmann2013} and VAM \cite{frost2020}. We leverage the concept of the $Q_1$ competitive hypothesis presented in Tian et al. \cite{tian2005} to formulate the enrichment of a set as the compositional balance \cite{rivera-pinto2018} of taxa within the set and remainder taxa using multiplication as the method of aggregating proportions \cite{egozcue2005}. This well-defined null hypothesis allows us to perform significance testing with interpretable results through estimating the empirical distribution of our statistic under the null that can also account for variance inflation due to inter-taxa correlation \cite{wu2012}. 
 
-In the following sections, we present our approach titled competitive balances for taxonomic erichment analysis (CBEA). First, we present the step-by-step formulation of CBEA and discuss its statistical properties. Second, we detail our evaluation strategy using both real data and parametric simulations, and the methods we're comparing against. Third, we present results on enrichment testing using CBEA for single samples as well as at the population level. Fourth, we show the performance of CBEA in downstream disease prediction. Finally, we discuss our results and the limitations of our method. An R package implementation of CBEA can be found on GitHub (\href{www.github.com/qpmnguyen/teaR}{qpmnguyen/CBEA}).
+In the following sections, we present our approach titled competitive balances for taxonomic erichment analysis (CBEA). First, we present the step-by-step formulation of CBEA and discuss its statistical properties. Second, we detail our evaluation strategy using both real data and parametric simulations, and the methods we are comparing against. Third, we present results on enrichment testing using CBEA for single samples as well as at the population level. Fourth, we show the performance of CBEA in downstream disease prediction. Finally, we discuss our results and the limitations of our method. An R package implementation of CBEA can be found on GitHub (\href{www.github.com/qpmnguyen/teaR}{qpmnguyen/CBEA}).
 
 \section*{Materials and Methods} \label{methods}
 \subsection*{Competitive balances for taxonomic enrichment analysis (CBEA)}
 The CBEA method generates sample-specific enrichment scores for microbial sets using products of proportions \cite{egozcue2003}. Details on the computational implementation of CBEA can be found in the Supplementary Materials. The CBEA method takes two inputs:  
 \begin{itemize}
-    \item $\mathbf{X}$: $n$ by $p$ matrix of positive propotions for $p$ taxa and $n$ samples measured through either targeted sequencing (such as of the 16S rRNA gene) or whole genome shotgun sequencing. Usually $\mathbf{X}$ is generated from standard taxonomic profiling pipelines such as DADA2 \cite{callahan2016} for 16S rRNA sequencing, or MetaPhlAn2 \cite{truong2015} for whole genome shotgun sequencing. CBEA does not accept $X$ matrices with zeroes since it invalidates the log-ratio transformation. Users can generate a dense matrix $X$ using a method of choice, however the default mode for CBEA would be add a pseudocount of $10^{-5}$ if zeroes are detected in the matrix. 
+    \item $\mathbf{X}$: $n$ by $p$ matrix of positive proportions for $p$ taxa and $n$ samples measured through either targeted sequencing (such as of the 16S rRNA gene) or whole genome shotgun sequencing. Usually $\mathbf{X}$ is generated from standard taxonomic profiling pipelines such as DADA2 \cite{callahan2016} for 16S rRNA sequencing, or MetaPhlAn2 \cite{truong2015} for whole genome shotgun sequencing. CBEA does not accept $X$ matrices with zeroes since it invalidates the log-ratio transformation. Users can generate a dense matrix $X$ using a method of choice, however by default mode CBEA will add a pseudocount of $10^{-5}$ if zeroes are detected in the matrix. 
     \item $\mathbf{A}$: $p$ by $m$ indicator matrix annotating the membership of each taxon $p$ to $m$ sets of interest. These sets can be Linnean taxonomic classifications annotated using databases such as SILVA \cite{quast2013}, or those based on more functionally driven categories such as tropism or ecosystem roles ($A_{i,j} = 1$ indicates that microbe $i$ belongs to set $j$). 
 \end{itemize}
 The CBEA method generates one output:  
@@ -289,19 +289,19 @@ The procedure is as follows:
 \end{enumerate}
 
 \subsection*{Properties of CBEA}
-\subsubsection*{CBEA and balances of groups of parts}
+\subsubsection*{CBEA and balances between groups of parts}
 The CBEA statistic is based on the multiplication-based aggregation approach used to calculate balances between groups of parts \cite{egozcue2005}. These balances are computed using the isometric log ratio (ILR) transformation \cite{egozcue2003} formula. For a given balance $i$ splitting variables across sets $R$ and $S$, we have the balance coordinate $x^{*}_{i}$ as: 
 \begin{equation}\label{ilr_standard}
     x^{*}_i = \sqrt{\frac{rs}{r+s}} \log\left(\frac{g(X_{j|j \in R})}{g(X_{j|j \in S})}\right)
 \end{equation}
 where $r$ and $s$ are the cardinalities of sets $R$ and $S$ respectively, $g(z)$ is the geometric mean, and $X_{j}$ are values of the original predictors with indexes defined by membership in $R$ and $S$. 
 
-CBEA belongs to a set of methods that seek to leverage compositional balances for the analysis of microbiome data \cite{washburne2017, rivera-pinto2018, silverman2017, morton2017}. Unlike methods such as PhILR \cite{silverman2017}, CBEA does not provide a sequential binary partition that forms the basis for ILR procedure \cite{egozcue2003} and is therefore not a subclass of ILR. A similar method to CBEA would be phylofactor \cite{washburne2017}. However, instead of performing an optimization procedure to identify interesting balances, CBEA constructs balances apriori using pre-defined sets, and formulates the enrichment of a set as the scaled log-ratio between the center of the subcomposition represented by microbes within the set and the center of the subcomposition represented by remainder taxa. This formulation aligns with the $Q_1$ null hypothesis from the gene set testing literature \cite{tian2005}. 
+CBEA belongs to a set of methods that seek to leverage compositional balances for the analysis of microbiome data \cite{washburne2017, rivera-pinto2018, silverman2017, morton2017}. Unlike methods such as PhILR \cite{silverman2017}, CBEA does not present an orthonormal basis for the complete ILR transformation (such as a a sequential binary partition) \cite{egozcue2003}. Therefore, it is not a subclass of the ILR transformation and is adjacent to this approach. A similar method to CBEA would be phylofactor \cite{washburne2017}. However, instead of performing an optimization procedure to identify interesting balances, CBEA constructs balances \emph{a priori} using pre-defined sets, and formulates the enrichment of a set as the scaled log-ratio between the center of the subcomposition represented by microbes within the set and the center of the subcomposition represented by remainder taxa. This formulation aligns with the $Q_1$ null hypothesis from the gene set testing literature \cite{tian2005}. 
 
 \subsubsection*{Estimating the null distribution}
 We can assume that the CBEA statistic, similar to other log-ratio based transforms, follows a normal distribution \cite{egozcue2003, aitchison1980}. However, when applying CBEA for hypothesis testing at the sample level, it is expected that the researcher would be testing a large number of hypotheses. Under the assumption that the number of truly significant hypotheses is low, Efron \cite{efron2004} showed that estimating the null distribution of the test statistic directly (termed the empirical null distribution) is much more preferable than using the theoretical null due to unobserved confounding effects inherently part of observational studies. As such, to perform significance testing using CBEA, we also estimated the null distribution from observed raw CBEA variables. 
 
-This assumption is also supported by preliminary simulation studies (detailed below). In panel A of Fig~\ref{fig:1}, we simulated microbiome taxonomic count data under the global null across different data features and compute raw CBEA scores and compute kurtosis and skewness. It can be seen that the characteristics of the null change depending on sparsity and inter-taxa correlation. Sparsity seems to drive the distribution to be more positively skewed while inter-taxa correlation encourages platykurtic (negative kurtosis). The effect is most dramatic under both high inter-taxa correlation and sparsity. This heterogeneity further supports the decision to estimate an empirical null distribution, as suggested by Efron \cite{efron2004}. 
+This assumption is also supported by preliminary simulation studies (detailed below). We simulated microbiome taxonomic count data under the global null across different data features and compute raw CBEA scores and compute kurtosis and skewness in Fig~\ref{fig:1}A. We found that the characteristics of the null change depending on sparsity and inter-taxa correlation. Sparsity seems to drive the distribution to be more positively skewed while inter-taxa correlation encourages platykurtic (negative kurtosis). The effect is most dramatic under both high inter-taxa correlation and sparsity. This heterogeneity further supports the decision to estimate an empirical null distribution, as suggested by Efron \cite{efron2004}. 
 
 \begin{figure} [!h]
     \centering
@@ -310,12 +310,12 @@ This assumption is also supported by preliminary simulation studies (detailed be
     \label{fig:1}
 \end{figure}
 
-Additionally, the degree of kurtosis and skewness also suggests that the normal distribution itself might not be a good approximation of the null. To address this issue, we also evaluated a two-component normal mixture distribution. Panel B of Fig~\ref{fig:1} demonstrates the goodness of fit of the mixture normal and the normal distribution using Kolmogorov-Smirnov (KS) test statistic computed on fitted normal and mixture normal distribution when fitted on CBEA scores in simulation scenarios under the global null. We can see that the mixture normal distribution is a better fit (lower KS scores) than the normal distribution across both sparsity and correlation settings. 
+Additionally, the degree of kurtosis and skewness also suggests that the normal distribution itself might not be a good approximation of the null. To address this issue, we also evaluated a two-component normal mixture distribution. The goodness of fit of the mixture normal and the normal distribution using Kolmogorov-Smirnov (KS) test statistic computed on fitted normal and mixture normal distribution when fitted on CBEA scores in simulation scenarios under the global null is shown in Fig~\ref{fig:1}B. We can see that the mixture normal distribution is a better fit (lower KS scores) than the normal distribution across both sparsity and correlation settings. 
 
 We performed our empirical null estimation by fitting our distribution of choice and computing relevant parameters on raw CBEA scores on taxa-permuted data (equivalent to gene permutation in the gene expression literature). As such, the null distribution is characterized by scores computed on sets of equal size with randomly drawn taxa. 
 
 \subsubsection*{Variance inflation due to inter-taxa correlation}  
-When taxa within a set are highly correlated, the variance of the sample mean of taxon-wise statistics is inflated. Without loss of generalizability, for a set of taxa with taxa-specific statistics $x_1, ..., x_p$ we have the variance of the mean $\bar{x}$ to be:  
+When taxa within a set are highly correlated, the variance of the sample mean of taxon-wise statistics is inflated. Without loss of generalizability, for a set of taxa with taxon-specific statistics $x_1, ..., x_p$ we have the variance of the mean $\bar{x}$ to be:  
 \begin{equation} \label{vareq:1}
     Var(\bar{x}) = \frac{1}{m^2}\left(\sum_{i = 1}(\sigma_i^2) + \sum_{i < j}\rho_{ij}\sigma_i\sigma_j\right)
 \end{equation}
@@ -336,7 +336,7 @@ We based our evaluation strategy on gene set testing benchmarking standards set 
 We evaluate the inference procedure of CBEA compared to alternate methods using two approaches: randomly sampled taxa sets and sample label permutation. These analyses were performed on the 16S rRNA gene sequencing of the oral microbiome from the Human Microbiome Project \cite{consortium2012, proctor2019}. This data set contains 369 samples split into two subsites: supragingival and subgingival. We processed this data set by removing all samples with total read counts less than 1000 and OTUs whose presence (at least 1 count) is in 10\% of samples or less.  
 
 \subsubsection*{Sample-level inference} 
-Due to CBEA's self-contained null hypothesis, we can perform inference at the sample level for the enrichment of a set. We evaluated this application by generating one random taxa of different sizes $S \in \{20, 50, 100, 150, 200\}$ across 500 iterations. Random sets can act as our estimate for type I error since this matches the CBEA null hypothesis stated in \nameref{methods}, where we expect within each sample sets of randomly drawn taxa should not be significantly enriched compared to the remainder background taxa. For this evaluation, we estimated type I error as the fraction of samples where our random set is detected as significant at a p-value threshold of 0.05 with confidence bands computed from the standard error across all iterations.  Additionally, this analysis also tests whether CBEA is sensitive to different set sizes.  
+Due to CBEA's self-contained null hypothesis, we can perform inference at the sample level for the enrichment of a set. We evaluated this application by generating one random taxon-set of different sizes $S \in \{20, 50, 100, 150, 200\}$ across 500 iterations. Random sets can act as our estimate for type I error since this matches the CBEA null hypothesis stated in \nameref{methods}, where we expect within each sample, sets of randomly drawn taxa should not be significantly enriched compared to the remainder background taxa. For this evaluation, we estimated type I error as the fraction of samples where our random set is detected as significant at a p-value threshold of 0.05 with confidence bands computed from the standard error across all iterations.  Additionally, this analysis also tests whether CBEA is sensitive to different set sizes.  
 
 \subsubsection*{Population-level inference} 
 We can perform enrichment testing at the population level by generating corresponding sample level CBEA scores and performing a two-sample test such as Welch's t-test. In order to evaluate CBEA under this context, we generated CBEA scores of sets representing genus-level annotation in above gingival data set \cite{consortium2012, proctor2019} and applied a t-test to test for enrichment (similar to GSVA \cite{hanzelmann2013}) across a randomly generated variable indicating case/control status (repeated 500 times). Type I error is estimated as the fraction of sets per iteration found to be significantly enriched with confidence bands computed from the standard error across all iterations. In addition, we also performed a random set analysis assessment, where we generated 100 sets of different set sizes $S \in \{20, 50, 100, 150, 200\}$ and evaluated the fraction of genera that were found to be differentially abundant across the original labels (supragingival versus subgingival subsite). 95\% confidence intervals were computed using the Agresti-Couli approach \cite{agresti1998}.  
@@ -352,7 +352,7 @@ CBEA scores can also be used for downstream analyses such as disease prediction 
 \begin{enumerate}
 \item Whole genome sequencing of stool samples from inflammatory bowel disease (IBD) patients in the MetaHIT consortium \cite{nielsen2014}. This data set contains 396 samples from a cohort of European adults, where 195 adults were classified as having IBD (which includes patients diagnosed with either ulcerative colitis or Crohn's disease). We processed this data by removing all samples with less than 1,000 total read counts as well as any OTU that was present (with non-zero proportions) in 10\% of the samples or less. Prior to model fitting, we back-transformed relative abundances into count data (to align the format with our 16S rRNA gene sequencing data set) using the provided total number of reads aligned to MetaPhlan marker genes (per sample).   
 
-\item 16S rRNA gene sequencing of stool samples from IBD patients in the pediatric RISK cohort \cite{gevers2014}. This data set contains 16S rRNA gene sequencing samples from a cohort of pediatric patients (ages $<$ 17) from the RISK cohort enrolled in the United States and Canada. Of the 671 samples obtained, 500 samples belong to patients with IBD. We processed this data set by removing all samples with less than 1,000 total read counts as well as any OTU that was present (at least 1 count) in 10\% of the samples or less.   
+\item 16S rRNA gene sequencing of stool samples from IBD patients in the RISK cohort \cite{gevers2014}. This data set contains 16S rRNA gene sequencing samples from a cohort of pediatric patients (ages $<$ 17) from the RISK cohort enrolled in the United States and Canada. Of the 671 samples obtained, 500 samples belong to patients with IBD. We processed this data set by removing all samples with less than 1,000 total read counts as well as any OTU that was present (at least 1 count) in 10\% of the samples or less.   
 \end{enumerate}
 
 We evaluate disease prediction performance by fitting a random forest model \cite{breiman2001} using as inputs CBEA scores to classify samples of patients with IBD and healthy controls. Random forest was chosen as a baseline learner due to its flexibility as an out-of-the-box model that is easy to fit. In this instance we evaluated predictive performance of a default random forest model (without hyperparameter tuning) AUROC after 10-fold cross validation. Additionally, we utilized SMOTE to correct for class imbalances \cite{chawla2002}. Implementation was done using the \emph{tidymodels} suite of packages \cite{kuhn2020}.   
@@ -408,7 +408,7 @@ In Fig~\ref{fig:4}, we evaluate whether sets found to be significant by CBEA are
 
 We estimated statistical power using this data set as the fraction of supragingival samples where the set representing aerobic microbes were significantly enriched. We observed that adjusted CBEA approaches demonstrate much lower power compared to the Wilcoxon rank-sum test and unadjusted variants. This is surprising given the fact that in statistical significance analyses, the adjusted CBEA approach provides inflated type I error, especially if the normal distribution assumption was chosen, which indicates a mismatch in estimating the null distribution since a high type I error did not result in increased power. 
 
-We also evaluated phenotype relevance by assessing whether enriched sets according to ground truth are preferentially ranked higher using assigned continuous scores (instead of performing a hypothesis test). This aspect is captured through computing AUROC values comparing computed enrichment scores and true labels. Consistent with prior approaches, adjusting for correlation did not improve performance, where the AUROC values are equivalent to using the Wilcoxon Rank sum statistic at around 0.5. Unadjusted methods were much better at ranking true enriched sets, however the mean AUROC values are lower than alternate single sample enrichment methods (GSVA \cite{hanzelmann2013} and ssGSEA \cite{barbie2009}) even though this difference is not significant due to overlapping confidence intervals.  
+We also evaluated phenotype relevance by assessing whether enriched sets according to ground truth are preferentially ranked higher using assigned continuous scores (instead of performing a hypothesis test). This aspect is captured through computing AUROC values comparing computed enrichment scores and true labels. Consistent with the previous type I error evaluation, adjusting for correlation did not improve performance, where obtained AUROC were around 0.5 and at the same level as the benchmark Wilcoxon rank sum statistic. Unadjusted methods were much better at ranking true enriched sets, however the mean AUROC values are lower than alternate single sample enrichment methods (GSVA \cite{hanzelmann2013} and ssGSEA \cite{barbie2009}) even though this difference is not significant due to overlapping confidence intervals.  
 
 The above results were replicated in simulation studies where we observed that adjusted approaches were very conservative and demonstrated significantly lower power (\nameref{S3_Fig}) with increasing correlation even at the highest evaluated effect sizes. When assessing score rankings, the performance of CBEA was closer to ssGSEA and GSVA compared to real data evaluations, however all single sample approaches were much better than using the W statistic from the Wilcoxon Rank Sum test.   
 
@@ -423,7 +423,7 @@ The above results were replicated in simulation studies where we observed that a
 We also assessed statistical power for population level inference scenarios using a similar approach. Here, enrichment scores for sets representing all identified genera were computed, and power was estimated as the fraction of sets found to be differentially enriched across sample site labels (supragingival or subgingival). We compared these results against performing a differential abundance test of genus level features generated via sum-based approaches. Results are shown in Fig~\ref{fig:5}. Some CBEA variants, such as CDF outputs for the mixture normal distributional assumption, did not correctly detect as many significant sets as DESeq2 or corncob despite very close performance values. Using raw CBEA scores was best approach, however it did not exceed values obtained from DESeq2 and corncob. 
 
 \subsection*{Disease Prediction}   
-Since CBEA can generate informative scores that can discriminate between samples with inflated counts for a set (Fig~\ref{fig:4}), we want to assess whether they can also act as useful inputs to predictive models. In this section we assessed the predictive performance of a standard baseline random forest model \cite{breiman2001} with different single sample enrichment scoring methods as inputs (CBEA, ssGSEA, and GSVA). Additionally, we also compared predictive performance of using these scores against the a standard approach of using the centered log ratio transformation (CLR) on taxon sets aggregated via abundance summations.     
+Since CBEA can generate informative scores that can discriminate between samples with inflated counts for a set (Fig~\ref{fig:4}), we wanted to assess whether they can also act as useful inputs to predictive models. In this section we assessed the predictive performance of a standard baseline random forest model \cite{breiman2001} with different single sample enrichment scoring methods as inputs (CBEA, ssGSEA, and GSVA). Additionally, we also compared predictive performance of using these scores against the a standard approach of using the centered log ratio transformation (CLR) on taxon sets aggregated via abundance summations.     
 
 %\begin{figure}[!ht]
 %    \centering
@@ -432,7 +432,7 @@ Since CBEA can generate informative scores that can discriminate between samples
 %    \label{fig:sim_pred_rsq}
 %\end{figure}
 
-We fit our model to two data sets with a similar disease classification task of discriminating patients who are diagnosed with IBD (includes both Crohn's disease and ulcerative colitis) using only microbiome taxonomic composition. The two data sets represent different microbiome sequencing aprpaoches: the Gevers et al. \cite{gevers2014} data set uses 16S rRNA gene sequencing, while the Nielsen et al \cite{nielsen2014} data set uses whole genome shotgun sequencing. 
+We fit our model to two data sets with a similar disease classification task of discriminating patients who were diagnosed with IBD (includes both Crohn's disease and ulcerative colitis) using only microbiome taxonomic composition. The two data sets represent different microbiome sequencing aprpaoches: the Gevers et al. \cite{gevers2014} data set uses 16S rRNA gene sequencing, while the Nielsen et al \cite{nielsen2014} data set uses whole genome shotgun sequencing. 
 
 \begin{figure}[!h]
     \centering
@@ -446,32 +446,32 @@ Fig~\ref{fig:6} illustrates the performance of our model with AUROC as the evalu
 \section*{Discussion}
 
 \subsection*{Inference with CBEA} 
-CBEA is a microbiome-specific approach to generate sample specific enrichment scores for taxonomic sets defined apriori. The formulation of CBEA as a comparison between taxa within the set and its complement corresponds to the competitive null hypothesis in the gene set testing literature \cite{tian2005}. Since this null hypothesis is self-contained per sample, this allows users perform enrichment testing at the sample level. Additionally, in combination with a difference in means test, CBEA can also test for enrichment at the population level across case/control status similar to GSVA \cite{hanzelmann2013}.  
+CBEA is a microbiome-specific approach to generate sample specific enrichment scores for taxonomic sets defined \emph{a priori}. The formulation of CBEA as a comparison between taxa within the set and its complement corresponds to the competitive null hypothesis in the gene set testing literature \cite{tian2005}. Since this null hypothesis is self-contained per sample, this allows users perform enrichment testing at the sample level. Additionally, in combination with a difference in means test, CBEA can also test for enrichment at the population level across case/control status similar to GSVA \cite{hanzelmann2013}.  
 
-For single-sample analyses, we demonstrated that the CBEA approach (unadjusted with mixture normal parametric assumption) was able to control for type I error at the nominal level of 0.05 under the global null (Fig~\ref{fig:2}) while also demonstrating respectable power (Fig~\ref{fig:4}). This performance is consistent across different set sizes as well as our prior distributional fit analyses (Fig~\ref{fig:1}), where the mixture normal displayed superior fit to the null distribution. Unfortunately, other variants of CBEA demonstrated neither good type I error control nor power. Interestingly, while the adjusted methods showed poor performance in real data evaluations (Fig~\ref{fig:2}), in simulation studies (\nameref{S1_Fig}, \nameref{S3_Fig}) these approaches were able to control for type I error well with the trade-off of much lower power. 
+For single-sample analyses, we demonstrated that the CBEA approach (unadjusted with mixture normal parametric assumption) was able to control for type I error at the nominal level of 0.05 under the global null (Fig~\ref{fig:2}) while also demonstrating adequate power (Fig~\ref{fig:4}). This performance is consistent across different set sizes as well as our prior distributional fit analyses (Fig~\ref{fig:1}), where the mixture normal displayed superior fit to the null distribution. Unfortunately, other variants of CBEA demonstrated neither good type I error control nor power. Interestingly, while the adjusted methods showed poor performance in real data evaluations (Fig~\ref{fig:2}), in simulation studies (\nameref{S1_Fig}, \nameref{S3_Fig}) these approaches were able to control for type I error well with the trade-off of much lower power. 
 For the population-level inference task, CBEA also performed very well. Under the permutation global null, representing genera abundance using CBEA scores in combination with Welch's t-test controls for type I error at the correct $\alpha$ threshold while also keeping respectable power. Since the population level enrichment test is equivalent to a differential abundance test using set-based features, we compared the CBEA approach against using element-wise summations with corncob \cite{martin2020} and DESeq2 \cite{love2014} to test for set-level differential abundance. We chose DESeq2 because it is an older approach from the bulk RNA-seq literature that has strong support for usage in microbiome taxonomic data \cite{mcmurdie2014}. Alternately, corncob is a newer method developed specifically for microbiome taxonomic data sets, where taxonomic counts are modeled directly using a beta-binomial distribution instead of relying on normalization via size factor estimation. We observed that using this approach resulted in an inflated type I error compared to all variants of CBEA (Fig~\ref{fig:2}), yet did not improve power (Fig~\ref{fig:4}). Results for CBEA approaches were replicated in simulation analyses, however for corncob and DESeq2 we observed an opposite effect: in simulation experiments, both methods show good type I error control but low power (\nameref{S2_Fig}, \nameref{S4_Fig}).  
 
-We hypothesized that the discrepancy between simulation and real data evaluations can can arise due to differences in our assumptions regarding the data generating process that informed our simulation schema. For the non-zero component of each taxa, we sampled from the same negative binomial distribution where designated enriched taxa were generated with inflated means (but the same dispersion). These marginals were simulated to account for block exchangable correlation within the enriched set only. This might affect our results in two ways. First, our simulation scenario ensures that all designated non-enriched taxa is identical to each other. This is not the case for real data, where our null scenario involves randomly sampled sets that might by chance all have taxa with inflated means compared to remainder taxa. This is represented in \nameref{S7_Fig}, where the distribution of type I error across 500 replications are right skewed for underperforming CBEA variants, indicating that these approaches are much more sensitive compared to the Wilcoxon rank sum test or unadjusted CBEA with mixture normal distribution. Second, as described in the \nameref{introduction} section, we did not consider taxon-specific biases that distort the observed relative abundance of taxa compared to true values \cite{mclaren2019}. In the context of sum-based aggregations, the resulting bias of the aggregated taxon are dependent on the relative abundances of the contributing taxa (Appendix I in \cite{mclaren2019}). Conceptually, this means that measurement error for a taxon aggregate is different across samples as relative abundance of contributing changes, leading to issues when attempting to perform inference. As such, we expect methods like corncob or DESeq2 when performed on such sum aggregates in the presence of taxon-specific biases to have inflated type I error compared to our multiplication based approach. This also explains why conversely in simulation studies, where taxon-specific biases are absent, corncob and DESeq2 performed better. 
+We hypothesized that the discrepancy between simulation and real data evaluations could be due to differences in our assumptions regarding the data generating process that informed our simulation schema. For the non-zero component of each taxon, we sampled from the same negative binomial distribution where designated enriched taxa were generated with inflated means (but the same dispersion). These marginals were simulated to account for block exchangable correlation within the enriched set only. This might have affected our results in two ways. First, our simulation scenario ensures that all designated non-enriched taxa are identical to each other. This is not the case for real data, where our null scenario involves randomly sampled sets that might by chance all have taxa with inflated means compared to remainder taxa. This is represented in \nameref{S7_Fig}, where the distribution of type I error across 500 replications is right skewed for underperforming CBEA variants, indicating that these approaches are much more sensitive compared to the Wilcoxon rank sum test or unadjusted CBEA with mixture normal distribution. Second, as described in the \nameref{introduction} section, we did not consider taxon-specific biases that distort the observed relative abundance of taxa compared to true values \cite{mclaren2019}. In the context of sum-based aggregations, the resulting bias of the aggregated taxon-set is dependent on the relative abundances of the contributing taxa (Appendix I in \cite{mclaren2019}). Conceptually, this means that measurement error for a taxon-set is different across samples as relative abundance of contributing taxa changes, leading to issues when attempting to perform inference. As such, we expect methods like corncob or DESeq2 when performed on such sum aggregates in the presence of taxon-specific biases to have inflated type I error compared to our multiplication based approach. This also explains why conversely in simulation studies, where taxon-specific biases are absent, corncob and DESeq2 performed better. 
 
 \subsection*{Downstream analysis using predictive models}
 The sample-level enrichment scores generated by the CBEA method can be used in downstream analyses such as disease prediction. We evaluated whether CBEA can be used to generate set-based features for disease prediction models. 
 
-We fit a basic random forest model \cite{breiman2001} to predict continuous and binary outcomes using CBEA generated scores as inputs. Similar to our inference analysis, we compared CBEA against both ssGSEA and GSVA. Additionally, we also evaluated CBEA with the approach where counts of a set were aggregated using sums and applied the centered log-ratio transformation (CLR). This is because CLR is considered standard practice in using microbiome variables as predictors for a model \cite{gloor2017}. Results showed that CBEA generate scores perform well across both real data settings and simulation scenarios. Since predictive models consider the effect of variables jointly (and in the case of random forest, consider interactions as well), good performance indicates that CBEA scores can capture joint distribution of sets, enabling both uniset and multi-set type analyses. Comparatively, CBEA generated scores outperformed other enrichment score methods (GSVA and ssGSEA), suggesting that it is more tailored for microbiome taxonomic data sets. This is consistent with our sample ranking analysis (Fig~\ref{fig:4}), where CBEA scores are on average more informative when used to rank samples based on their propensity to have inflated counts. However, CBEA did not outperform the CLR approach across our simulation studies, and only marginally performed better in the real data analysis with WGS data. Fortunately, in simulation studies, this performance gap between CLR and CBEA decreases with higher sparsity and correlation, especially in low effect saturation scenarios.  
+We fit a basic random forest model \cite{breiman2001} to predict continuous and binary outcomes using CBEA generated scores as inputs. Similar to our inference analysis, we compared CBEA against both ssGSEA and GSVA. Additionally, we also evaluated CBEA with the approach where counts of a set were aggregated using sums and applied the centered log-ratio transformation (CLR). This is because CLR is considered standard practice in using microbiome variables as predictors for a model \cite{gloor2017}. Results showed that CBEA generate scores perform well across both real data and simulation scenarios. Since predictive models consider the effect of variables jointly (and in the case of random forest, consider interactions as well), good performance indicates that CBEA scores can capture joint distribution of sets, enabling both uniset and multi-set type analyses. Comparatively, CBEA generated scores outperformed other enrichment score methods (GSVA and ssGSEA), suggesting that it is more tailored for microbiome taxonomic data sets. This is consistent with our sample ranking analysis (Fig~\ref{fig:4}), where CBEA scores are on average more informative when used to rank samples based on their propensity to have inflated counts. However, CBEA did not outperform the CLR approach across our simulation studies, and only marginally performed better in the real data analysis with WGS data. Fortunately, in simulation studies, this performance gap between CLR and CBEA decreases with higher sparsity and correlation, especially in low effect saturation scenarios.  
 
 \subsection*{Limitations and future directions} 
 
-These above results demonstrate the applicability of CBEA under different data analysis scenarios. If researchers are interested in perform inference, they can decide between an unsupervised sample level approach (i.e. screen samples for enrichment of certain characteristics) or a supervised population level approach (i.e. identifying characteristics that are differentially abundant across case/control status). For the unsupervised approach, utilizing the unadjusted CBEA with the mixture normal distribution provides a good initial starting point. In the case where researchers only want to screen samples with mean-inflated taxon sets (instead of additionally detecting taxon sets with increased correlation), they can apply the adjusted approach, which can be effective at conserving type I error even for high correlation scenarios. However, the trade off for this adjustment is power, which decreases with increasing correlation. For the supervised analysis, all CBEA variants control for type I error and provide adequate statistical power. However, using raw CBEA scores with difference-in-means test such as Welch's t-test is preferable since is the least computationally expensive (no estimation process) while still outperforming the use of a sum-based approach with a standard differential abundance test.     
+These above results demonstrate the applicability of CBEA under different data analysis scenarios. If researchers are interested in performing inference, they can decide between an unsupervised sample level approach (i.e. screen samples for enrichment of certain characteristics) or a supervised population level approach (i.e. identifying characteristics that are differentially abundant across case/control status). For the unsupervised approach, utilizing the unadjusted CBEA with the mixture normal distribution provides a good initial starting point. In the case where researchers only want to screen samples with mean-inflated taxon sets (instead of additionally detecting taxon sets with increased correlation), they can apply the adjusted approach, which can be effective at conserving type I error even for high correlation scenarios. However, the trade off for this adjustment is power, which decreases with increasing correlation. For the supervised analysis, all CBEA variants control for type I error and provide adequate statistical power. However, using raw CBEA scores with difference-in-means test such as Welch's t-test is preferable since is the least computationally expensive (no estimation process) while still outperforming the use of a sum-based approach with a standard differential abundance test.     
 
-Beyond inference, CBEA scores are flexible and can be useful for downstream analysis. We demonstrated that for a given number of set-based features, CBEA can produce informative scores that contribute to competitive performance of prediction models even in low signal-to-noise ratios with high inter-taxa correlation and sparsity. This is especially true for whole genome sequencing data sets, where CBEA outperfrorms the standard approach of applying a CLR transformation. Researchers might find CBEA useful under situations of high sparsity and inter-taxa correlation, or if the property of a singular covariance matrix (a byproduct of the CLR transformation \cite{gloor2017}) is undesired. Even though we only evaluated prediction models in this manuscript, researchers can benchmark their own usage of CBEA for other downstream tasks such as sample ordination. 
+Beyond inference, CBEA scores are flexible and can be useful for downstream analysis. We demonstrated that for a given number of set-based features, CBEA can produce informative scores that contribute to competitive performance of prediction models even in low signal-to-noise ratios with high inter-taxa correlation and sparsity. This is especially true for whole genome sequencing data sets, where CBEA outperfrorms the standard approach of applying a CLR transformation. Researchers might find CBEA useful under situations of high sparsity and inter-taxa correlation, or if the property of a singular covariance matrix (a byproduct of the CLR transformation \cite{gloor2017}) is undesired. Even though we only evaluated prediction models, researchers can benchmark their own usage of CBEA for other downstream tasks such as sample ordination. 
 
-However, there are various limitations to our evaluation of CBEA. First, our simulation analysis might not capture the appropriate data-generating distributions underlying microbiome taxonomic data. There is strong evidence to suggest that our zero-inflated negative binomial distribution is representative \cite{calgaro2020}, however other distributions such as the Dirichlet multinomial distribution \cite{wu2016a} have been used in the evaluation of prior studies. More recent studies have suggested utilizing the hierarchical multinomial logistic normal distribution to model microbiome data sets \cite{morton2021, ma2021a}. As such, there is space to evaluate and adapt CBEA to these different distributional assumptions that underlie the data generating process. Second, we were not able to evaluate the phenotype relevance of enrichment results as in Geistlinger et al. \cite{geistlinger2021} due to limited consistent annotations for microbiome signatures in health and disease, especially those that are experimentally verified (and not just from differential abundance studies). We attempted to perform this evaluation by leveraging the gingival data set similar to \cite{calgaro2020}. However, we acknowledge that this is not a perfect solution, since the oxygen usage label of each microbe in the data set is only available at the genus level, and the difference in counts for obligate aerobes and anaerobes across the supragingival and subgingival sites might not be as clear cut. As such, results from power analyses using this data set is only relative between the comparison methods and cannot be treated as absolute measures of power or phenotype relevance. Third, fitting the mixture normal distribution to raw CBEA scores using the expectation-maximization algorithm is difficult, as the convergence rate is slow when there is high overlap between the mixtures, resulting in small mixing coefficient for one of the components and increased runtime (\nameref{S6_Fig}) \cite{naim2012}. In our implementation, we attempted to account for this by increasing the maximum number of iterations and relaxed the tolerance threshold. Finally, we assumed that taxa within a set are all equally associated with the outcome. This limits our ability to evaluate the performance of CBEA when only a small number of taxa within the set is associated with the outcome, or if there are variability in effect sizes or association direction of taxa within a set. 
+However, there are various limitations to our evaluation of CBEA. First, our simulation analysis may not capture the appropriate data-generating distributions underlying microbiome taxonomic data. There is strong evidence to suggest that our zero-inflated negative binomial distribution is representative \cite{calgaro2020}, however other distributions such as the Dirichlet multinomial distribution \cite{wu2016a} have been used in the evaluation of prior studies. More recent studies have suggested utilizing the hierarchical multinomial logistic normal distribution to model microbiome data sets \cite{morton2021, ma2021a}. As such, there is space to evaluate and adapt CBEA to these different distributional assumptions that underlie the data generating process. Second, we were not able to evaluate the phenotype relevance of enrichment results as in Geistlinger et al. \cite{geistlinger2021} due to limited consistent annotations for microbiome signatures in health and disease, especially those that are experimentally verified (and not just from differential abundance studies). We attempted to perform this evaluation by leveraging the gingival data set similar to \cite{calgaro2020}. However, we acknowledge that this is not a perfect solution, since the oxygen usage label of each microbe in the data set is only available at the genus level, and the difference in counts for obligate aerobes and anaerobes across the supragingival and subgingival sites might not be as clear cut. As such, results from power analyses using this data set is only relative between the comparison methods and cannot be treated as absolute measures of power or phenotype relevance. Third, fitting the mixture normal distribution to raw CBEA scores using the expectation-maximization algorithm is difficult, as the convergence rate is slow when there is high overlap between the mixtures, resulting in small mixing coefficient for one of the components and increased runtime (\nameref{S6_Fig}) \cite{naim2012}. In our implementation, we attempted to account for this by increasing the maximum number of iterations and relaxed the tolerance threshold. Finally, we assumed that taxa within a set are all equally associated with the outcome. This limits our ability to evaluate the performance of CBEA when only a small number of taxa within the set is associated with the outcome, or if there are variability in effect sizes or association direction of taxa within a set. 
 
 Our evaluation also showed various drawbacks of the CBEA method itself. First, inference with CBEA at the sample level is limited, and can be affected by inter-taxa correlation if users wish to only detect mean-inflated sets. Second, for downstream analyses, CBEA might not always perform better than competing methods, especially when being used to generate inputs to predictive models. We hypothesized that this might be due to the lack of fit for the underlying null distribution in high correlation settings, especially the identifiability problem associated the estimation procedure associated with adjusting the mixture normal distribution. As such, we hope to refine the null distribution estimating procedure by either choosing a better distributional form, or to further constrain the optimization procedure of the mixture normal distribution by fixing the third and fourth moments. 
 
-In addition, CBEA itself did not consider other aspects of microbiome data. First, across all analyses, we relied on adding a pseudocount to ensure log operations are valid. Users can directly address this by incorporating model-based zero correction methods prior to modelling such as in \cite{martin-fernandez2012} or \cite{kaul2017a}. However, in our simulation studies, sparsity seems to not have a significant impact on the overall performance of our approach. Second, CBEA also treated all taxa within the set as equally contributing to the set. Incorporation of taxa-specific weights (similar to PhILR \cite{silverman2017}) could reduce the influence of outliers, such as rare or highly invariant taxa. Finally, even though for a given set of apriori annotations CBEA can generate useful summary scores, such values are limited in their utility if the annotations themselves are not meaningful. As such, curating and validating sets (similar to MSigDB \cite{subramanian2005}) based on physiological or genomic characteristics of microbes \cite{weissman2021} or their association with human disease (in beta BugSigDB \url{https://bugsigdb.org/Main_Page}) can allow for incorporating functional insights into microbiome-outcome analyses.  
+In addition, CBEA itself did not consider other aspects of microbiome data. First, across all analyses, we relied on adding a pseudocount to ensure log operations are valid. Users can directly address this by incorporating model-based zero correction methods prior to modelling such as in \cite{martin-fernandez2012} or \cite{kaul2017a}. However, in our simulation studies, sparsity seems to not have a significant impact on the overall performance of our approach. Second, CBEA also treated all taxa within the set as equally contributing to the set. Incorporation of taxa-specific weights (similar to PhILR \cite{silverman2017}) could reduce the influence of outliers, such as rare or highly invariant taxa. Finally, even though for a given set of \emph{a priori} annotations CBEA can generate useful summary scores, such values are limited in their utility if the annotations themselves are not meaningful. As such, curating and validating sets (similar to MSigDB \cite{subramanian2005}) based on physiological or genomic characteristics of microbes \cite{weissman2021} or their association with human disease (in beta BugSigDB \url{https://bugsigdb.org/Main_Page}) can allow for incorporating functional insights into microbiome-outcome analyses.  
 
 \section*{Conclusion}
-Gene set testing, or pathway analysis is an important tool in the analysis of high-dimensional genomics data sets. However, limited work has been done developing set based methods specifically for microbiome relative abundance data. We introduced a new microbiome-specific method to generate set-based enrichment scores at the sample level. We demonstrated that our method can control for type I error for significance testing at the sample level, while generated scores are also valid inputs in downstream analyses, including disease prediction and differential abundance.  
+Gene set testing, or pathway analysis, is an important tool in the analysis of high-dimensional genomics data sets; however, limited work has been done developing set based methods specifically for microbiome relative abundance data. We introduced a new microbiome-specific method to generate set-based enrichment scores at the sample level. We demonstrated that our method can control for type I error for significance testing at the sample level, while generated scores are also valid inputs in downstream analyses, including disease prediction and differential abundance.  
 
 \section*{Acknowledgments}
 The authors thank Becky Lebeaux, Modupe Coker, Erika Dade, Jie Zhou, and Weston Viles for insightful comments and suggestions that greatly improved the paper. This work is supported by the National Institutes of Health (grants NCI R21CA253408, NIGMS P20GM130454, NCI P30CA023108, and NLM R01LM012723). 
@@ -491,7 +491,466 @@ The authors thank Becky Lebeaux, Modupe Coker, Erika Dade, Jie Zhou, and Weston 
 % step-by-step instructions.
 % 
 
-\bibliography{references}{}
+%\bibliography{references}{}
+\begin{thebibliography}{10}
+
+\bibitem{proctor2019}
+Proctor LM, Creasy HH, Fettweis JM, {Lloyd-Price} J, Mahurkar A, Zhou W, et~al.
+\newblock The {{Integrative Human Microbiome Project}}.
+\newblock Nature. 2019;569(7758):641--648.
+\newblock doi:{10.1038/s41586-019-1238-8}.
+
+\bibitem{sharma2019a}
+Sharma S, Tripathi P.
+\newblock Gut Microbiome and Type 2 Diabetes: Where We Are and Where to Go?
+\newblock The Journal of Nutritional Biochemistry. 2019;63:101--108.
+\newblock doi:{10.1016/j.jnutbio.2018.10.003}.
+
+\bibitem{aoun2020}
+Aoun A, Darwish F, Hamod N.
+\newblock The {{Influence}} of the {{Gut Microbiome}} on {{Obesity}} in
+  {{Adults}} and the {{Role}} of {{Probiotics}}, {{Prebiotics}}, and
+  {{Synbiotics}} for {{Weight Loss}}.
+\newblock Preventive Nutrition and Food Science. 2020;25(2):113--123.
+\newblock doi:{10.3746/pnf.2020.25.2.113}.
+
+\bibitem{cho2012}
+Cho I, Blaser MJ.
+\newblock The Human Microbiome: At the Interface of Health and Disease.
+\newblock Nature Reviews Genetics. 2012;13(4):260--270.
+\newblock doi:{10.1038/nrg3182}.
+
+\bibitem{callahan2016}
+Callahan BJ, McMurdie PJ, Rosen MJ, Han AW, Johnson AJA, Holmes SP.
+\newblock {{DADA2}}: {{High-resolution}} Sample Inference from {{Illumina}}
+  Amplicon Data.
+\newblock Nature Methods. 2016;13(7):581--583.
+\newblock doi:{10.1038/nmeth.3869}.
+
+\bibitem{truong2015}
+Truong DT, Franzosa EA, Tickle TL, Scholz M, Weingart G, Pasolli E, et~al.
+\newblock {{MetaPhlAn2}} for Enhanced Metagenomic Taxonomic Profiling.
+\newblock Nature Methods. 2015;12(10):902--903.
+\newblock doi:{10.1038/nmeth.3589}.
+
+\bibitem{li2019a}
+Li H.
+\newblock Statistical and {{Computational Methods}} in {{Microbiome}} and
+  {{Metagenomics}}.
+\newblock In: Handbook of {{Statistical Genomics}}. {John Wiley \& Sons, Ltd};
+  2019. p. 977--550.
+
+\bibitem{li2015}
+Li H.
+\newblock Microbiome, {{Metagenomics}}, and {{High-Dimensional Compositional
+  Data Analysis}}.
+\newblock Annual Review of Statistics and Its Application. 2015;2(1):73--94.
+\newblock doi:{10.1146/annurev-statistics-010814-020351}.
+
+\bibitem{gloor2017}
+Gloor GB, Macklaim JM, {Pawlowsky-Glahn} V, Egozcue JJ.
+\newblock Microbiome {{Datasets Are Compositional}}: {{And This Is Not
+  Optional}}.
+\newblock Frontiers in Microbiology. 2017;8.
+\newblock doi:{10.3389/fmicb.2017.02224}.
+
+\bibitem{khatri2012}
+Khatri P, Sirota M, Butte AJ.
+\newblock Ten {{Years}} of {{Pathway Analysis}}: {{Current Approaches}} and
+  {{Outstanding Challenges}}.
+\newblock PLOS Computational Biology. 2012;8(2):e1002375.
+\newblock doi:{10.1371/journal.pcbi.1002375}.
+
+\bibitem{goeman2007}
+Goeman JJ, B{\"u}hlmann P.
+\newblock Analyzing Gene Expression Data in Terms of Gene Sets: Methodological
+  Issues.
+\newblock Bioinformatics. 2007;23(8):980--987.
+\newblock doi:{10.1093/bioinformatics/btm051}.
+
+\bibitem{subramanian2005}
+Subramanian A, Tamayo P, Mootha VK, Mukherjee S, Ebert BL, Gillette MA, et~al.
+\newblock Gene Set Enrichment Analysis: {{A}} Knowledge-Based Approach for
+  Interpreting Genome-Wide Expression Profiles.
+\newblock Proceedings of the National Academy of Sciences.
+  2005;102(43):15545--15550.
+\newblock doi:{10.1073/pnas.0506580102}.
+
+\bibitem{ashburner2000}
+Ashburner M, Ball CA, Blake JA, Botstein D, Butler H, Cherry JM, et~al.
+\newblock Gene {{Ontology}}: Tool for the Unification of Biology.
+\newblock Nature genetics. 2000;25(1):25--29.
+\newblock doi:{10.1038/75556}.
+
+\bibitem{irizarry2009}
+Irizarry RA, Wang C, Zhou Y, Speed TP.
+\newblock Gene {{Set Enrichment Analysis Made Simple}}.
+\newblock Statistical methods in medical research. 2009;18(6):565--575.
+\newblock doi:{10.1177/0962280209351908}.
+
+\bibitem{hanzelmann2013}
+H{\"a}nzelmann S, Castelo R, Guinney J.
+\newblock {{GSVA}}: Gene Set Variation Analysis for Microarray and {{RNA-Seq}}
+  Data.
+\newblock BMC Bioinformatics. 2013;14(1):7.
+\newblock doi:{10.1186/1471-2105-14-7}.
+
+\bibitem{frost2020}
+Frost HR.
+\newblock Variance-Adjusted {{Mahalanobis}} ({{VAM}}): A Fast and Accurate
+  Method for Cell-Specific Gene Set Scoring.
+\newblock Nucleic Acids Research. 2020;48(16):e94--e94.
+\newblock doi:{10.1093/nar/gkaa582}.
+
+\bibitem{chong2020}
+Chong J, Liu P, Zhou G, Xia J.
+\newblock Using {{MicrobiomeAnalyst}} for Comprehensive Statistical,
+  Functional, and Meta-Analysis of Microbiome Data.
+\newblock Nature Protocols. 2020;15(3):799--821.
+\newblock doi:{10.1038/s41596-019-0264-1}.
+
+\bibitem{quinn2019}
+Quinn TP, Erb I, Gloor G, Notredame C, Richardson MF, Crowley TM.
+\newblock A Field Guide for the Compositional Analysis of Any-Omics Data.
+\newblock GigaScience. 2019;8(giz107).
+\newblock doi:{10.1093/gigascience/giz107}.
+
+\bibitem{quinn2018}
+Quinn TP, Erb I, Richardson MF, Crowley TM.
+\newblock Understanding Sequencing Data as Compositions: An Outlook and Review.
+\newblock Bioinformatics. 2018;34(16):2870--2878.
+\newblock doi:{10.1093/bioinformatics/bty175}.
+
+\bibitem{morton2019}
+Morton JT, Marotz C, Washburne A, Silverman J, Zaramela LS, Edlund A, et~al.
+\newblock Establishing Microbial Composition Measurement Standards with
+  Reference Frames.
+\newblock Nature Communications. 2019;10(1).
+\newblock doi:{10.1038/s41467-019-10656-5}.
+
+\bibitem{love2014}
+Love MI, Huber W, Anders S.
+\newblock Moderated Estimation of Fold Change and Dispersion for {{RNA-seq}}
+  Data with {{DESeq2}}.
+\newblock Genome Biology. 2014;15(12):550.
+\newblock doi:{10.1186/s13059-014-0550-8}.
+
+\bibitem{weiss2017}
+Weiss S, Xu ZZ, Peddada S, Amir A, Bittinger K, Gonzalez A, et~al.
+\newblock Normalization and Microbial Differential Abundance Strategies Depend
+  upon Data Characteristics.
+\newblock Microbiome. 2017;5(1).
+\newblock doi:{10.1186/s40168-017-0237-y}.
+
+\bibitem{mcknight2019}
+McKnight DT, Huerlimann R, Bower DS, Schwarzkopf L, Alford RA, Zenger KR.
+\newblock Methods for Normalizing Microbiome Data: {{An}} Ecological
+  Perspective.
+\newblock Methods in Ecology and Evolution. 2019;10(3):389--400.
+\newblock doi:{10.1111/2041-210X.13115}.
+
+\bibitem{aitchison1994}
+Aitchison J.
+\newblock Principles of Compositional Data Analysis.
+\newblock Lecture Notes-Monograph Series. 1994; p. 73--81.
+
+\bibitem{mclaren2019}
+McLaren MR, Willis AD, Callahan BJ.
+\newblock Consistent and Correctable Bias in Metagenomic Sequencing
+  Experiments.
+\newblock eLife. 2019;8:e46923.
+\newblock doi:{10.7554/eLife.46923}.
+
+\bibitem{egozcue2005}
+Egozcue JJ, {Pawlowsky-Glahn} V.
+\newblock Groups of {{Parts}} and {{Their Balances}} in {{Compositional Data
+  Analysis}}.
+\newblock Mathematical Geology. 2005;37(7):795--828.
+\newblock doi:{10.1007/s11004-005-7381-9}.
+
+\bibitem{tian2005}
+Tian L, Greenberg SA, Kong SW, Altschuler J, Kohane IS, Park PJ.
+\newblock Discovering Statistically Significant Pathways in Expression
+  Profiling Studies.
+\newblock Proceedings of the National Academy of Sciences.
+  2005;102(38):13544--13549.
+\newblock doi:{10.1073/pnas.0506577102}.
+
+\bibitem{rivera-pinto2018}
+{Rivera-Pinto} J, Egozcue JJ, {Pawlowsky-Glahn} V, Paredes R, {Noguera-Julian}
+  M, Calle ML.
+\newblock Balances: A {{New Perspective}} for {{Microbiome Analysis}}.
+\newblock mSystems. 2018;3(4):e00053--18.
+\newblock doi:{10.1128/mSystems.00053-18}.
+
+\bibitem{wu2012}
+Wu D, Smyth GK.
+\newblock Camera: A Competitive Gene Set Test Accounting for Inter-Gene
+  Correlation.
+\newblock Nucleic Acids Research. 2012;40(17):e133.
+\newblock doi:{10.1093/nar/gks461}.
+
+\bibitem{egozcue2003}
+Egozcue JJ, {Pawlowsky-Glahn} V, {Mateu-Figueras} G, {Barcel{\'o}-Vidal} C.
+\newblock Isometric {{Logratio Transformations}} for {{Compositional Data
+  Analysis}}.
+\newblock Mathematical Geology. 2003;35(3):279--300.
+\newblock doi:{10.1023/A:1023818214614}.
+
+\bibitem{quast2013}
+Quast C, Pruesse E, Yilmaz P, Gerken J, Schweer T, Yarza P, et~al.
+\newblock The {{SILVA}} Ribosomal {{RNA}} Gene Database Project: Improved Data
+  Processing and Web-Based Tools.
+\newblock Nucleic Acids Research. 2013;41(D1):D590--D596.
+\newblock doi:{10.1093/nar/gks1219}.
+
+\bibitem{delignette-muller2015}
+{Delignette-Muller} ML, Dutang C.
+\newblock Fitdistrplus: {{An R}} Package for Fitting Distributions.
+\newblock Journal of Statistical Software. 2015;64(4):1--34.
+
+\bibitem{benaglia2009}
+Benaglia T, Chauveau D, Hunter DR, Young D.
+\newblock Mixtools: {{An R}} Package for Analyzing Finite Mixture Models.
+\newblock Journal of Statistical Software. 2009;32(6):1--29.
+
+\bibitem{washburne2017}
+Washburne AD, Silverman JD, Leff JW, Bennett DJ, Darcy JL.
+\newblock Phylogenetic Factorization of Compositional Data Yields Lineage-Level
+  Associations in Microbiome Datasets.
+\newblock PeerJ. 2017; p.~26.
+
+\bibitem{silverman2017}
+Silverman JD, Washburne AD, Mukherjee S, David LA.
+\newblock A Phylogenetic Transform Enhances Analysis of Compositional
+  Microbiota Data.
+\newblock eLife. 2017;6:e21887.
+\newblock doi:{10.7554/eLife.21887}.
+
+\bibitem{morton2017}
+Morton JT, Sanders J, Quinn RA, McDonald D, Gonzalez A, {V{\'a}zquez-Baeza} Y,
+  et~al.
+\newblock Balance {{Trees Reveal Microbial Niche Differentiation}}.
+\newblock mSystems. 2017;2(1):e00162--16.
+\newblock doi:{10.1128/mSystems.00162-16}.
+
+\bibitem{aitchison1980}
+Aitchison J, Shen SM.
+\newblock Logistic-Normal Distributions:{{Some}} Properties and Uses.
+\newblock Biometrika. 1980;67(2):261--272.
+\newblock doi:{10.1093/biomet/67.2.261}.
+
+\bibitem{efron2004}
+Efron B.
+\newblock Large-{{Scale Simultaneous Hypothesis Testing}}.
+\newblock Journal of the American Statistical Association.
+  2004;99(465):96--104.
+\newblock doi:{10.1198/016214504000000089}.
+
+\bibitem{kurtz2015a}
+Kurtz ZD, M{\"u}ller CL, Miraldi ER, Littman DR, Blaser MJ, Bonneau RA.
+\newblock Sparse and {{Compositionally Robust Inference}} of {{Microbial
+  Ecological Networks}}.
+\newblock PLOS Computational Biology. 2015;11(5):e1004226.
+\newblock doi:{10.1371/journal.pcbi.1004226}.
+
+\bibitem{ackerman2009}
+Ackermann M, Strimmer K.
+\newblock A General Modular Framework for Gene Set Enrichment Analysis.
+\newblock BMC bioinformatics. 2009;10(1):1--20.
+
+\bibitem{geistlinger2021}
+Geistlinger L, Csaba G, Santarelli M, Ramos M, Schiffer L, Turaga N, et~al.
+\newblock Toward a Gold Standard for Benchmarking Gene Set Enrichment Analysis.
+\newblock Briefings in bioinformatics. 2021;22(1):545--556.
+
+\bibitem{pasolli2017}
+Pasolli E, Schiffer L, Manghi P, Renson A, Obenchain V, Truong DT, et~al.
+\newblock Accessible, Curated Metagenomic Data through {{ExperimentHub}}.
+\newblock Nature Methods. 2017;14(11):1023--1024.
+\newblock doi:{10.1038/nmeth.4468}.
+
+\bibitem{schiffer2019}
+Schiffer L, Azhar R, Shepherd L, Ramos M, Geistlinger L, Huttenhower C, et~al.
+\newblock {{HMP16SData}}: {{Efficient}} Access to the Human Microbiome Project
+  through Bioconductor.
+\newblock American Journal of Epidemiology. 2019;doi:{10.1093/aje/kwz006}.
+
+\bibitem{gonzalez2018}
+Gonzalez A, {Navas-Molina} JA, Kosciolek T, McDonald D, {V{\'a}zquez-Baeza} Y,
+  Ackermann G, et~al.
+\newblock Qiita: Rapid, Web-Enabled Microbiome Meta-Analysis.
+\newblock Nature Methods. 2018;15(10):796--798.
+\newblock doi:{10.1038/s41592-018-0141-9}.
+
+\bibitem{wickham2019}
+Wickham H, Averick M, Bryan J, Chang W, McGowan LD, Fran{\c c}ois R, et~al.
+\newblock Welcome to the Tidyverse.
+\newblock Journal of Open Source Software. 2019;4(43):1686.
+\newblock doi:{10.21105/joss.01686}.
+
+\bibitem{robin2011}
+Robin X, Turck N, Hainard A, Tiberti N, Lisacek F, Sanchez JC, et~al.
+\newblock {{pROC}}: An Open-Source Package for {{R}} and {{S}}+ to Analyze and
+  Compare {{ROC}} Curves.
+\newblock BMC Bioinformatics. 2011;12:77.
+
+\bibitem{mcmurdie2014}
+McMurdie PJ, Holmes S.
+\newblock Waste {{Not}}, {{Want Not}}: {{Why Rarefying Microbiome Data Is
+  Inadmissible}}.
+\newblock PLOS Computational Biology. 2014;10(4):e1003531.
+\newblock doi:{10.1371/journal.pcbi.1003531}.
+
+\bibitem{ernst2021}
+Ernst FGM, Shetty SA, Borman T, Lahti L. Mia: {{Microbiome}} Analysis; 2021.
+
+\bibitem{landau2021}
+Landau WM.
+\newblock The Targets {{R}} Package: A Dynamic {{Make-like}} Function-Oriented
+  Pipeline Toolkit for Reproducibility and High-Performance Computing.
+\newblock Journal of Open Source Software. 2021;6(57):2959.
+
+\bibitem{consortium2012}
+Consortium THMP, Huttenhower C, Gevers D, Knight R, Abubucker S, Badger JH,
+  et~al.
+\newblock Structure, Function and Diversity of the Healthy Human Microbiome.
+\newblock Nature. 2012;486(7402):207--214.
+\newblock doi:{10.1038/nature11234}.
+
+\bibitem{agresti1998}
+Agresti A, Coull BA.
+\newblock Approximate {{Is Better}} than "{{Exact}}" for {{Interval
+  Estimation}} of {{Binomial Proportions}}.
+\newblock The American Statistician. 1998;52(2):119--126.
+\newblock doi:{10.2307/2685469}.
+
+\bibitem{thurnheer2016}
+Thurnheer T, Bostanci N, Belibasakis GN.
+\newblock Microbial Dynamics during Conversion from Supragingival to
+  Subgingival Biofilms in an in Vitro Model.
+\newblock Molecular Oral Microbiology. 2016;31(2):125--135.
+\newblock doi:{10.1111/omi.12108}.
+
+\bibitem{beghini2019}
+Beghini F, Renson A, Zolnik CP, Geistlinger L, Usyk M, Moody TU, et~al.
+\newblock Tobacco Exposure Associated with Oral Microbiota Oxygen Utilization
+  in the {{New York City Health}} and {{Nutrition Examination Study}}.
+\newblock Annals of Epidemiology. 2019;34:18--25.e3.
+\newblock doi:{10.1016/j.annepidem.2019.03.005}.
+
+\bibitem{matteocalgaro2020}
+Calgaro M. Mcalgaro93/Sc2meta: {{Paper Release}}; 2020.
+\newblock Zenodo.
+
+\bibitem{delong1988}
+DeLong ER, DeLong DM, {Clarke-Pearson} DL.
+\newblock Comparing the Areas under Two or More Correlated Receiver Operating
+  Characteristic Curves: A Nonparametric Approach.
+\newblock Biometrics. 1988;44(3):837--845.
+
+\bibitem{nielsen2014}
+Nielsen HB, Almeida M, Juncker AS, Rasmussen S, Li J, Sunagawa S, et~al.
+\newblock Identification and Assembly of Genomes and Genetic Elements in
+  Complex Metagenomic Samples without Using Reference Genomes.
+\newblock Nature Biotechnology. 2014;32(8):822--828.
+\newblock doi:{10.1038/nbt.2939}.
+
+\bibitem{gevers2014}
+Gevers D, Kugathasan S, Denson LA, {V{\'a}zquez-Baeza} Y, Van~Treuren W, Ren B,
+  et~al.
+\newblock The {{Treatment-Naive Microbiome}} in {{New-Onset Crohn}}'s
+  {{Disease}}.
+\newblock Cell Host \& Microbe. 2014;15(3):382--392.
+\newblock doi:{10.1016/j.chom.2014.02.005}.
+
+\bibitem{breiman2001}
+Breiman L.
+\newblock Random {{Forests}}.
+\newblock Machine Learning. 2001;45(1):5--32.
+\newblock doi:{10.1023/A:1010933404324}.
+
+\bibitem{chawla2002}
+Chawla NV, Bowyer KW, Hall LO, Kegelmeyer WP.
+\newblock {{SMOTE}}: {{Synthetic Minority Over-sampling Technique}}.
+\newblock Journal of Artificial Intelligence Research. 2002;16:321--357.
+\newblock doi:{10.1613/jair.953}.
+
+\bibitem{kuhn2020}
+Kuhn M, Wickham H. Tidymodels: A Collection of Packages for Modeling and
+  Machine Learning Using Tidyverse Principles.; 2020.
+
+\bibitem{martin2020}
+Martin BD, Witten D, Willis AD.
+\newblock Modeling Microbial Abundances and Dysbiosis with Beta-Binomial
+  Regression.
+\newblock The Annals of Applied Statistics. 2020;14(1):94--115.
+\newblock doi:{10.1214/19-AOAS1283}.
+
+\bibitem{barbie2009}
+Barbie DA, Tamayo P, Boehm JS, Kim SY, Moody SE, Dunn IF, et~al.
+\newblock Systematic {{RNA}} Interference Reveals That Oncogenic
+  {{{\emph{KRAS}}}}-Driven Cancers Require {{TBK1}}.
+\newblock Nature. 2009;462(7269):108--112.
+\newblock doi:{10.1038/nature08460}.
+
+\bibitem{calgaro2020}
+Calgaro M, Romualdi C, Waldron L, Risso D, Vitulo N.
+\newblock Assessment of Statistical Methods from Single Cell, Bulk {{RNA-seq}},
+  and Metagenomics Applied to Microbiome Data.
+\newblock Genome Biology. 2020;21(1):191.
+\newblock doi:{10.1186/s13059-020-02104-1}.
+
+\bibitem{wu2016a}
+Wu C, Chen J, Kim J, Pan W.
+\newblock An Adaptive Association Test for Microbiome Data.
+\newblock Genome Medicine. 2016;8(1):56.
+\newblock doi:{10.1186/s13073-016-0302-3}.
+
+\bibitem{morton2021}
+Morton JT, Silverman J, Tikhonov G, L{\"a}hdesm{\"a}ki H, Bonneau R.
+\newblock Scalable Estimation of Microbial Co-Occurrence Networks with
+  {{Variational Autoencoders}}.
+\newblock {Bioinformatics}; 2021.
+
+\bibitem{ma2021a}
+Ma S, Ren B, Mallick H, Moon YS, Schwager E, Maharjan S, et~al.
+\newblock A Statistical Model for Describing and Simulating Microbial Community
+  Profiles.
+\newblock PLOS Computational Biology. 2021;17(9):e1008913.
+\newblock doi:{10.1371/journal.pcbi.1008913}.
+
+\bibitem{naim2012}
+Naim I, Gildea D.
+\newblock Convergence of the {{EM Algorithm}} for {{Gaussian Mixtures}} with
+  {{Unbalanced Mixing Coefficients}}.
+\newblock Proceedings of the 29th International Coference on International
+  Conference on Machine Learning. 2012; p.~8.
+\newblock doi:{10.5555/3042573.3042756}.
+
+\bibitem{martin-fernandez2012}
+{Mart{\'i}n-Fern{\'a}ndez} JA, Hron K, Templ M, Filzmoser P,
+  {Palarea-Albaladejo} J.
+\newblock Model-Based Replacement of Rounded Zeros in Compositional Data:
+  {{Classical}} and Robust Approaches.
+\newblock Computational Statistics \& Data Analysis. 2012;56(9):2688--2704.
+\newblock doi:{10.1016/j.csda.2012.02.012}.
+
+\bibitem{kaul2017a}
+Kaul A, Davidov O, Peddada SD.
+\newblock Structural Zeros in High-Dimensional Data with Applications to
+  Microbiome Studies.
+\newblock Biostatistics. 2017;18(3):422--433.
+\newblock doi:{10.1093/biostatistics/kxw053}.
+
+\bibitem{weissman2021}
+Weissman JL, Dogra S, Javadi K, Bolten S, Flint R, Davati C, et~al.
+\newblock Exploring the Functional Composition of the Human Microbiome Using a
+  Hand-Curated Microbial Trait Database.
+\newblock BMC Bioinformatics. 2021;22(1):306.
+\newblock doi:{10.1186/s12859-021-04216-2}.
+
+\end{thebibliography}
 
 
 \section*{Supporting information}
@@ -523,7 +982,7 @@ The authors thank Becky Lebeaux, Modupe Coker, Erika Dade, Jie Zhou, and Weston 
 
 \paragraph*{S7 Fig.}
 \label{S7_Fig}
-{\bf Distribution of type I error values across all replications in real data random set evaluations for CBEA inference at the sample-level.} Placeholder text. 
+{\bf Distribution of type I error values across all replications in real data random set evaluations for CBEA inference at the sample-level.} Density (\emph{y}-axis) for type I error values (\emph{x}-axis) of each evaluated approach for sample-level inference using real data across 500 replications. Here, type I error was estimated as the proportion of samples where a randomly sampled set of different sizes where identified to be statistically significant at $p$-value threshold of 0.05.  
 
 \paragraph*{S1 File.}
 \label{S1_File}

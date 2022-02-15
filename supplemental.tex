@@ -125,7 +125,7 @@ For population-level analyses, we assessed phenotype relevance as statistical po
     \label{fig:s5}
 \end{figure}
 
-Fig~\ref{fig:s5} shows results for simulation studies as detailed in the \nameref{methods} section. Panel A presents results for a regression learning task with a continuous outcome. We observed no difference in performance values across different evaluation models. Overall, prediction error did not change across sparsity levels, and decreases with increasing signal-to-noise ratio (SNR). However, at higher correlation levels, the pattern was more erratic. For example, when $\rho$ is set at $0.5$, higher SNR decreases performance only at low sparsity $p = 0.2$, but had the expected pattern medium sparsity $p = 0.4$, where higher SNR correlates with improved performance. This effect seems to be specific to low effect saturation scenarios (only a limited number of taxa sets are associated with the outcome). Interestingly, higher sparsity levels produces better performance.
+Fig~\ref{fig:s5} shows results for simulation studies as detailed in the Methods section. Panel A presents results for a regression learning task with a continuous outcome. We observed no difference in performance values across different evaluation models. Overall, prediction error did not change across sparsity levels, and decreases with increasing signal-to-noise ratio (SNR). However, at higher correlation levels, the pattern was more erratic. For example, when $\rho$ is set at $0.5$, higher SNR decreases performance only at low sparsity $p = 0.2$, but had the expected pattern medium sparsity $p = 0.4$, where higher SNR correlates with improved performance. This effect seems to be specific to low effect saturation scenarios (only a limited number of taxa sets are associated with the outcome). Interestingly, higher sparsity levels produces better performance.
 
 Panel B represent results for a classification task with a binary outcome with AUROC as the evaluation criteria. Here we observed similar results as that of our real data evaluations, where using CLR transfromed data produces more predictive models across all scenarios. Conversely, GSVA and ssGSEA were consistently under performing when compared to CBEA and CLR. Interestingly, the degree of difference varies across sparsity and inter-taxa correlations. We noticed that increasing sparsity and correlation decreases the gap in performance between CBEA and CLR, while increasing the gap in performance between CBEA/CLR and GSVA/ssGSEA. As such, we can hypothesize that both GSVA and ssGSEA are more sensitive to the degree of inter-taxa correlation and sparsity. Finally, effect saturation did not change model rankings, but did decrease overall performance.  
 
@@ -143,8 +143,121 @@ In general, using the normal distribution is the fastest approach regardless of 
 
 In order to reduce runtime, users can attempt the following: Since CBEA fits parametric distributions over permuted values of all samples within a data set (i.e. for $N = 100$ and $10$ permutations, the fitting procedure will attempt to estimate parameters from a vector of size $1000$ for each set), if the sample size is high users can reduce the number of permutations. Additionally, CBEA also implements a procedure to parallelize computation across sets, which might be applicable to situations where there are a lot of sets to evaluate. Finally, a lot of CBEA approaches work well without parametric fit, so users can use the non-parametric approaches like the permutation test or using raw CBEA scores. 
 
+\section{Single sample type I error diagnostic plot}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/data_ss_diag_ridges.png}
+    \caption{\textbf{Distribution of type I error values across app relications in real data random set evaluations for CBEA inference at the sample level}. Density (\emph{y}-axis) for type I error values (\emph{x}-axis) of each evaluated approach for sample-level inference using real data across 500 replications. Here, type I error was estimated as the proportion of samples where a randomly sampled set of different sizes where identified to be statistically significant at $p$-value threshold of 0.05} 
+    \label{fig:s7}
+\end{figure}
+
 \clearpage
-\bibliography{references}{}
+%\bibliography{references}{}
+\begin{thebibliography}{10}
+
+\bibitem{delignette-muller2015}
+{Delignette-Muller} ML, Dutang C.
+\newblock Fitdistrplus: {{An R}} Package for Fitting Distributions.
+\newblock Journal of Statistical Software. 2015;64(4):1--34.
+
+\bibitem{benaglia2009}
+Benaglia T, Chauveau D, Hunter DR, Young D.
+\newblock Mixtools: {{An R}} Package for Analyzing Finite Mixture Models.
+\newblock Journal of Statistical Software. 2009;32(6):1--29.
+
+\bibitem{wu2012}
+Wu D, Smyth GK.
+\newblock Camera: A Competitive Gene Set Test Accounting for Inter-Gene
+  Correlation.
+\newblock Nucleic Acids Research. 2012;40(17):e133.
+\newblock doi:{10.1093/nar/gks461}.
+
+\bibitem{calgaro2020}
+Calgaro M, Romualdi C, Waldron L, Risso D, Vitulo N.
+\newblock Assessment of Statistical Methods from Single Cell, Bulk {{RNA-seq}},
+  and Metagenomics Applied to Microbiome Data.
+\newblock Genome Biology. 2020;21(1):191.
+\newblock doi:{10.1186/s13059-020-02104-1}.
+
+\bibitem{cario1997}
+Cario MC.
+\newblock Modeling and {{Generating Random Vectors}} with {{Arbitrary Marginal
+  Distributions}} and {{Correlation Matrix}}; 1997.
+
+\bibitem{agresti1998}
+Agresti A, Coull BA.
+\newblock Approximate {{Is Better}} than "{{Exact}}" for {{Interval
+  Estimation}} of {{Binomial Proportions}}.
+\newblock The American Statistician. 1998;52(2):119--126.
+\newblock doi:{10.2307/2685469}.
+
+\bibitem{frost2020}
+Frost HR.
+\newblock Variance-Adjusted {{Mahalanobis}} ({{VAM}}): A Fast and Accurate
+  Method for Cell-Specific Gene Set Scoring.
+\newblock Nucleic Acids Research. 2020;48(16):e94--e94.
+\newblock doi:{10.1093/nar/gkaa582}.
+
+\bibitem{delong1988}
+DeLong ER, DeLong DM, {Clarke-Pearson} DL.
+\newblock Comparing the Areas under Two or More Correlated Receiver Operating
+  Characteristic Curves: A Nonparametric Approach.
+\newblock Biometrics. 1988;44(3):837--845.
+
+\bibitem{hawinkel2019}
+Hawinkel S, Mattiello F, Bijnens L, Thas O.
+\newblock A Broken Promise: Microbiome Differential Abundance Methods Do Not
+  Control the False Discovery Rate.
+\newblock Briefings in Bioinformatics. 2019;20(1):210--221.
+\newblock doi:{10.1093/bib/bbx104}.
+
+\bibitem{breiman2001}
+Breiman L.
+\newblock Random {{Forests}}.
+\newblock Machine Learning. 2001;45(1):5--32.
+\newblock doi:{10.1023/A:1010933404324}.
+
+\bibitem{kuhn2020}
+Kuhn M, Wickham H. Tidymodels: A Collection of Packages for Modeling and
+  Machine Learning Using Tidyverse Principles.; 2020.
+
+\bibitem{xiao2018}
+Xiao J, Chen L, Yu Y, Zhang X, Chen J.
+\newblock A {{Phylogeny-Regularized Sparse Regression Model}} for {{Predictive
+  Modeling}} of {{Microbial Community Data}}.
+\newblock Frontiers in Microbiology. 2018;9.
+\newblock doi:{10.3389/fmicb.2018.03112}.
+
+\bibitem{dong2020}
+Dong M, Li L, Chen M, Kusalik A, Xu W.
+\newblock Predictive Analysis Methods for Human Microbiome Data with
+  Application to {{Parkinson}}'s Disease.
+\newblock PLOS ONE. 2020;15(8):e0237779.
+\newblock doi:{10.1371/journal.pone.0237779}.
+
+\bibitem{hanzelmann2013}
+H{\"a}nzelmann S, Castelo R, Guinney J.
+\newblock {{GSVA}}: Gene Set Variation Analysis for Microarray and {{RNA-Seq}}
+  Data.
+\newblock BMC Bioinformatics. 2013;14(1):7.
+\newblock doi:{10.1186/1471-2105-14-7}.
+
+\bibitem{love2014}
+Love MI, Huber W, Anders S.
+\newblock Moderated Estimation of Fold Change and Dispersion for {{RNA-seq}}
+  Data with {{DESeq2}}.
+\newblock Genome Biology. 2014;15(12):550.
+\newblock doi:{10.1186/s13059-014-0550-8}.
+
+\bibitem{martin2020}
+Martin BD, Witten D, Willis AD.
+\newblock Modeling Microbial Abundances and Dysbiosis with Beta-Binomial
+  Regression.
+\newblock The Annals of Applied Statistics. 2020;14(1):94--115.
+\newblock doi:{10.1214/19-AOAS1283}.
+
+\end{thebibliography}
+
 \bibliographystyle{plos2015}
 
 \end{document}
