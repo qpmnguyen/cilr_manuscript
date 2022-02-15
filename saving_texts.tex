@@ -97,3 +97,15 @@ In this analysis, CBEA unfortunately did not outperform the CLR approach, which 
     \caption{Predictive performance of a naive random forest model trained on CBEA, ssGSEA, GSVA generated scores as well as the standard CLR approach on simulated across different levels of data sparsity, inter-taxa correlation, effect saturation, and signal-to-noise ratio. Panel \textbf{(A)} presents performance on a regression task using predictive R-squared as the evaluation measure. Panel \textbf{(B)} presents performance on a classification task with AUC as the evaluation measure. CBEA approaches outperformed GSVA and ssGSEA across all simulation conditions but not the CLR approach.}
     \label{fig:6}
 \end{figure}
+
+\section{Distribution of p-values}
+We also demonstrate the validity our inference procedure by assessing the distribution of p-values. We used simulated data sets as described in the main manuscript, under different data sparsity levels (0, 0.6) and inter-taxa correlation within the set ($\rho$ = 0, 0.5). We evaluated p-values of the correlation adjusted method for $\rho = 0.5$ case and the p-values of the unadjusted method for $\rho = 0$ case.  
+
+In general, sparsity has no effect on the distribution of p-values, where it remains uniform at zero correlation values. However, for higher correlation values, p-values deviate more from uniform under the global null, with the mixture normal distribution being further away from uniform compared to the normal distribution. 
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=\textwidth]{figures/pval_distr.png}
+    \caption{Q-Q plot of 10,000 p-values compared against a uniform distribution bounded between 0 and 1. Evaluation was performed on simulated null data sets of 10,000 samples testing for enrichment of a set of size 50. For correlation of 0.5, p-values represent correlation adjusted cILR while for correlation of 0, p-values represent unadjusted cILR.}
+    \label{fig:s7}
+\end{figure}

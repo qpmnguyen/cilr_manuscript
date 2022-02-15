@@ -130,30 +130,20 @@ In this analysis, CBEA unfortunately did not outperform the CLR approach, which 
 
 
 \section{Performance evaluation} 
-We implemented CBEA in the package \emph{CBEA} on GitHub (\url{https://www.github.com/qpmnguyen/CBEA}). We evaluated computational time using the \emph{bench} package in R. Sample size and number of sets were varied across different evaluation conditions. All set sizes were kept constant at 50. 
+We implemented CBEA in the package \emph{CBEA} on GitHub (\url{https://www.github.com/qpmnguyen/CBEA}). We evaluated computational time using the \emph{bench} package in R. We applied CBEA to a standard data set generated using our simulation model consisting of 40 sets (of size 20 each) and 500 samples. Benchmark was performed on a single core using a node on the computing cluster (Specifications: Intel Xeon E5-2690 (2.6GHz) with 4GB of RAM). 
 
-\begin{figure}[!ht]
+\begin{figure}[!h]
     \centering
     \includegraphics[width=\textwidth]{figures/performance.png}
-    \caption{Computational time (in seconds) as a function of sample size (left panel) and number of taxa sets evaluated (right panel). Evaluation was performed on simulated data sets. For sample size analysis, only 10 sets were evaluated. For taxa set analysis, sample size was fixed at 1,000. Across all evaluations, the size of each taxa set was also fixed at 50.}
+    \caption{\textbf{Runtime performance}. Overall runtime of CBEA under different parameters for a data set of 500 samples, 800 taxa (40 sets of size 20 each). This data set was generated via simulations.} 
     \label{fig:s6}
 \end{figure}
 
-In general, increasing sample size and number of evaluated sets both increase computational time. The mixture normal distribution takes longer to compute compared to the normal distribution, and adjusted methods take longer but was most apparent when combined with the mixture distribution. Overall, a reasonable data set of 1,000 samples and 100 sets (5,000 taxa) would take around 200 seconds (or approximately 3 minutes) for the longest approach (correlation adjusted mixture normal distribution). Benchmark was performed on a single core using a personal Windows laptop (Specifications: Intel Core i7-9750H (2.6-4.5 GHz - 12MB Cache) with 16GB of RAM)
+In general, using the normal distribution is the fastest approach regardless of the total number of permutations performed (2 minutes). However, using the mixture normal distribution increased the runtime many folds, especially for the adjusted approach (highest was 5.53 hours). This time scales with the number of sets evaluated, as well as the number of samples. We believe this is due to the procedure used to estimate parameters of the mixture normal distrubiton as implemented in the \emph{mixtools} package. The default parameters used in CBEA also increased the runtime in order to reduce convergence issues.  
 
-\section{Distribution of p-values}
-We also demonstrate the validity our inference procedure by assessing the distribution of p-values. We used simulated data sets as described in the main manuscript, under different data sparsity levels (0, 0.6) and inter-taxa correlation within the set ($\rho$ = 0, 0.5). We evaluated p-values of the correlation adjusted method for $\rho = 0.5$ case and the p-values of the unadjusted method for $\rho = 0$ case.  
+In order to reduce runtime, users can attempt the following: Since CBEA fits parametric distributions over permuted values of all samples within a data set (i.e. for $N = 100$ and $10$ permutations, the fitting procedure will attempt to estimate parameters from a vector of size $1000$ per set), if the sample size is high users can reduce the number of permutations. Additionally, CBEA also implements a procedure to parallelize computation across sets, which might be applicable to situations where there are a lot of sets. Finally, a lot of CBEA approaches work well without parametric fit, so users can use the non-parametric approaches. 
 
-In general, sparsity has no effect on the distribution of p-values, where it remains uniform at zero correlation values. However, for higher correlation values, p-values deviate more from uniform under the global null, with the mixture normal distribution being further away from uniform compared to the normal distribution. 
-
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=\textwidth]{figures/pval_distr.png}
-    \caption{Q-Q plot of 10,000 p-values compared against a uniform distribution bounded between 0 and 1. Evaluation was performed on simulated null data sets of 10,000 samples testing for enrichment of a set of size 50. For correlation of 0.5, p-values represent correlation adjusted cILR while for correlation of 0, p-values represent unadjusted cILR.}
-    \label{fig:s7}
-\end{figure}
-
-\newpage
+\clearpage
 \bibliography{references}{}
 \bibliographystyle{plos2015}
 
