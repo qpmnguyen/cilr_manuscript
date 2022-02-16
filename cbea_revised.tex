@@ -425,13 +425,6 @@ We also assessed statistical power for population level inference scenarios usin
 \subsection*{Disease Prediction}   
 Since CBEA can generate informative scores that can discriminate between samples with inflated counts for a set (Fig~\ref{fig:4}), we wanted to assess whether they can also act as useful inputs to predictive models. In this section we assessed the predictive performance of a standard baseline random forest model \cite{breiman2001} with different single sample enrichment scoring methods as inputs (CBEA, ssGSEA, and GSVA). Additionally, we also compared predictive performance of using these scores against the a standard approach of using the centered log ratio transformation (CLR) on taxon sets aggregated via abundance summations.     
 
-%\begin{figure}[!ht]
-%    \centering
-%    \includegraphics[width=\textwidth]{figures/sim_pred_rsq.png}
-%    \caption{Predictive R-squared of a random forest model for a continuous outcome trained on CBEA,     %ssGSEA, GSVA generated scores as well as on standard CLR transformed data evaluated on simulated data %across sparsity levels, correlation, and signal-to-noise ratio. Panel \textbf{(A)} and \textbf{(B)} %represent results across different levels of model saturation (proportion of sets associated with the %outcome). CBEA approaches outperformed GSVA and ssGSEA but not standard CLR.}
-%    \label{fig:sim_pred_rsq}
-%\end{figure}
-
 We fit our model to two data sets with a similar disease classification task of discriminating patients who were diagnosed with IBD (includes both Crohn's disease and ulcerative colitis) using only microbiome taxonomic composition. The two data sets represent different microbiome sequencing aprpaoches: the Gevers et al. \cite{gevers2014} data set uses 16S rRNA gene sequencing, while the Nielsen et al \cite{nielsen2014} data set uses whole genome shotgun sequencing. 
 
 \begin{figure}[!h]
@@ -474,7 +467,8 @@ In addition, CBEA itself did not consider other aspects of microbiome data. Firs
 Gene set testing, or pathway analysis, is an important tool in the analysis of high-dimensional genomics data sets; however, limited work has been done developing set based methods specifically for microbiome relative abundance data. We introduced a new microbiome-specific method to generate set-based enrichment scores at the sample level. We demonstrated that our method can control for type I error for significance testing at the sample level, while generated scores are also valid inputs in downstream analyses, including disease prediction and differential abundance.  
 
 \section*{Acknowledgments}
-The authors thank Becky Lebeaux, Modupe Coker, Erika Dade, Jie Zhou, and Weston Viles for insightful comments and suggestions that greatly improved the paper. This work is supported by the National Institutes of Health (grants NCI R21CA253408, NIGMS P20GM130454, NCI P30CA023108, and NLM R01LM012723). 
+The authors thank Becky Lebeaux, Modupe Coker, Erika Dade, Jie Zhou, and Weston Viles for insightful comments and suggestions that greatly improved the paper. Funding for HRF provided by National Institutes of Health grants R21CA253408, P20GM130454 and P30CA023108. Funding for AGH provided by National Institutes of Health grant R01LM012723. Funding for QPN provide by National Institutes of Health grants K01LM012426,
+R21CA253408, P20GM130454, and R01LM012723. The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript.
 
 \nolinenumbers
 % Either type in your references using
