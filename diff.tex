@@ -1,7 +1,7 @@
 % Template for PLoS
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL cbea.tex           Tue Nov 30 11:48:00 2021
-%DIF ADD cbea_revised.tex   Tue Feb 15 15:46:34 2022
+%DIF ADD cbea_revised.tex   Tue Feb 15 22:00:10 2022
 % Version 3.5 March 2018
 %
 % % % % % % % % % % % % % % % % % % % % % %
@@ -976,17 +976,18 @@ Since \DIFdelbegin \DIFdel{cILR }\DIFdelend \DIFaddbegin \DIFadd{CBEA }\DIFadden
 %DIFDELCMD < 
 
 %DIFDELCMD < %%%
-\DIFdelend %\begin{figure}[!ht]
-%    \centering
-%    \includegraphics[width=\textwidth]{figures/sim_pred_rsq.png}
+%DIF < \begin{figure}[!ht]
+%DIF <     \centering
+%DIF <     \includegraphics[width=\textwidth]{figures/sim_pred_rsq.png}
 %DIF <     \caption{Predictive R-squared of a random forest model for a continuous outcome trained on cILR,     %ssGSEA, GSVA generated scores as well as on standard CLR transformed data evaluated on simulated data %across sparsity levels, correlation, and signal-to-noise ratio. Panel \textbf{(A)} and \textbf{(B)} %represent results across different levels of model saturation (proportion of sets associated with the %outcome). cILR approaches outperformed GSVA and ssGSEA but not standard CLR.}
-%DIF >     \caption{Predictive R-squared of a random forest model for a continuous outcome trained on CBEA,     %ssGSEA, GSVA generated scores as well as on standard CLR transformed data evaluated on simulated data %across sparsity levels, correlation, and signal-to-noise ratio. Panel \textbf{(A)} and \textbf{(B)} %represent results across different levels of model saturation (proportion of sets associated with the %outcome). CBEA approaches outperformed GSVA and ssGSEA but not standard CLR.}
-%    \label{fig:sim_pred_rsq}
-%\end{figure}
+%DIF <     \label{fig:sim_pred_rsq}
+%DIF < \end{figure}
+%DIFDELCMD < 
 
-\DIFdelbegin \subsubsection*{\DIFdel{Real data evaluations}}
+%DIFDELCMD < %%%
+\subsubsection*{\DIFdel{Real data evaluations}}
 %DIFAUXCMD
-\DIFdel{In addition to parametric simulations, we also assessed the performance of using cILR scores in predictive models with real data sets. Fig~\ref{fig:7} presents results for }\DIFdelend \DIFaddbegin \DIFadd{We fit our model to }\DIFaddend two data sets with a similar disease classification task of discriminating patients who \DIFdelbegin \DIFdel{are }\DIFdelend \DIFaddbegin \DIFadd{were }\DIFaddend diagnosed with IBD (includes both Crohn's disease and ulcerative colitis) using only microbiome taxonomic composition. The two data sets represent different microbiome sequencing aprpaoches: the Gevers et al. \cite{gevers2014} data set uses 16S rRNA gene sequencing, while the Nielsen et al \cite{nielsen2014} data set uses whole genome shotgun sequencing. 
+\DIFdel{In addition to parametric simulations, we also assessed the performance of using cILR scores in predictive models with real data sets . Fig~\ref{fig:7} presents results for two data sets }\DIFdelend \DIFaddbegin \DIFadd{We fit our model to two data sets }\DIFaddend with a similar disease classification task of discriminating patients who \DIFdelbegin \DIFdel{are }\DIFdelend \DIFaddbegin \DIFadd{were }\DIFaddend diagnosed with IBD (includes both Crohn's disease and ulcerative colitis) using only microbiome taxonomic composition. The two data sets represent different microbiome sequencing aprpaoches: the Gevers et al. \cite{gevers2014} data set uses 16S rRNA gene sequencing, while the Nielsen et al \cite{nielsen2014} data set uses whole genome shotgun sequencing. 
 
 \begin{figure}[!h]
     \centering
@@ -1114,7 +1115,8 @@ or their association with human disease (in beta BugSigDB }\url{https://bugsigdb
 Gene set testing, or pathway analysis\DIFaddbegin \DIFadd{, }\DIFaddend is an important tool in the analysis of high-dimensional genomics data sets\DIFdelbegin \DIFdel{. However}\DIFdelend \DIFaddbegin \DIFadd{; however}\DIFaddend , limited work has been done developing set based methods specifically for microbiome relative abundance data. We introduced a new microbiome-specific method to generate set-based enrichment scores at the sample level. We demonstrated that our method can control for type I error for significance testing at the sample level, while generated scores are also valid inputs in downstream analyses, including disease prediction and differential abundance.  
 
 \section*{Acknowledgments}
-The authors thank Becky Lebeaux, Modupe Coker, Erika Dade, Jie Zhou, and Weston Viles for insightful comments and suggestions that greatly improved the paper. \DIFaddbegin \DIFadd{This work is supported by the National Institutes of Health (grants NCI R21CA253408, NIGMS P20GM130454, NCI P30CA023108, and NLM R01LM012723). 
+The authors thank Becky Lebeaux, Modupe Coker, Erika Dade, Jie Zhou, and Weston Viles for insightful comments and suggestions that greatly improved the paper. \DIFaddbegin \DIFadd{Funding for HRF provided by National Institutes of Health grants R21CA253408, P20GM130454 and P30CA023108. Funding for AGH provided by National Institutes of Health grant R01LM012723. Funding for QPN provide by National Institutes of Health grants K01LM012426,
+R21CA253408, P20GM130454, and R01LM012723. The funders had no role in study design, data collection and analysis, decision to publish, or preparation of the manuscript.
 }\DIFaddend 
 
 \nolinenumbers
